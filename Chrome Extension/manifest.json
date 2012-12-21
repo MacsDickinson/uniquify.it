@@ -1,0 +1,37 @@
+{
+	"name" : "Password1",
+	"version" : "0.1",
+	"description" : "Generates a password for the site you are currenly on",
+	"homepage_url": "http://www.macsentom.co.uk/Password1/",
+	"background": { 
+		"scripts": [
+			"scripts/background.js"
+		]
+	},
+	"content_scripts": [{
+			"matches" : [
+				"http://*/*",
+				"https://*/*"
+			],
+			"js" : ["scripts/jquery-1.6.1.min.js", "scripts/jquery.leanModal.min.js", "scripts/contentscript.js"],
+			"css" : ["styles/contentscript.css"],
+			"run_at" : "document_idle",
+			"all_frames" : false
+		}
+	],
+	"page_action" : {
+		"default_icon": "icons/icon2_19.png",
+		"default_title" : "Password Generator Fetcher"
+	},
+	"icons" : {
+		"16" : "icons/icon2_16.png",
+		"19" : "icons/icon2_19.png",
+		"38" : "icons/icon_38.png",
+		"48" : "icons/icon_48.png",
+		"128" : "icons/icon_128.png"
+	},
+	"permissions": [
+		"tabs"
+	],
+	"manifest_version" : 2
+}

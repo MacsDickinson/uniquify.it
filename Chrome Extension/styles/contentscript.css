@@ -1,0 +1,33 @@
+.securepass-btn {
+	position: absolute !important;
+	z-index: 100 !important;
+	padding: 0 !important;
+	border: none !important;
+}
+.securepass-btn :hover{
+	cursor: pointer !important;
+}
+.securepass-wrapper{
+	position: relative;
+	border: 3px lime solid;
+	overflow: hidden;
+}
+.securepass-popup{
+	background-color: #DDD;
+	border: 1px #222 solid;
+	display: none;
+	padding: 25px
+}
+.securepass-click{
+	display: none;
+}
+#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
+} 
