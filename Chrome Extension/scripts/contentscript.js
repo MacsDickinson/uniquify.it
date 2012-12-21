@@ -1,3 +1,5 @@
+var clickedPassID;
+
 if ($("input:password").length) {
 	$("input:password").each(function(index) {
 		
@@ -30,14 +32,15 @@ if ($("input:password").length) {
 $('.securepass-btn').click(function(event) {
 	event.preventDefault();
 	$('.securepass-secretword', $(this).parents('.securepass-wrapper:first')).val("");
+	clickedPassID = $('.securepass-click', $(this).parents('.securepass-wrapper:first')).attr('name');
 	$('.securepass-click', $(this).parents('.securepass-wrapper:first')).click();
-	
 });
 $('.securepass-submit').click(function(event) {
 	event.preventDefault();
 	
 	var secretword = $('.securepass-secretword', $(this).parents('.securepass-wrapper:first')).val();
-	var url = 'http://www.macsentom.co.uk/SecurePass/Get';
+	var url = 'http://localhost:57181/Get';
+	/*
 	$.post(url, { key:secretword, value:document.domain }, function(password) {			
 		$('input:password', $(this).parents('.securepass-wrapper:first')).val(password);
 		$("#lean_overlay").click();
@@ -46,12 +49,12 @@ $('.securepass-submit').click(function(event) {
 		alert("Service Offline");
 		$("#lean_overlay").click();
 	});
-	/*
+	*/
 	$.ajax({
-		url: 'http://www.macsentom.co.uk/SecurePass/Get',
+		url: url,
 		data: '{ key: "' + secretword + '", value : "' + document.domain + '" }',
 		success: function(password) {			
-			$('input:password', $(this).parents('.securepass-wrapper:first')).val(password);
+			$('input:password', $('#'+clickedPassID).parents('.securepass-wrapper:first')).val(password);
 			$("#lean_overlay").click();
 		},
 		failure: function(error) {
@@ -63,5 +66,5 @@ $('.securepass-submit').click(function(event) {
 			$("#lean_overlay").click();
 		}
 	});
-	*/
+	
 });
