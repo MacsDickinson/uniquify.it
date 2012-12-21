@@ -1,0 +1,36 @@
+﻿@model SecurePass.Models.PassCode
+
+@{
+    ViewBag.Title = "title";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<h2>SecurePass</h2>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <section class="panel">
+        <fieldset>
+            <h1>Get Your Secure Password:</h1>
+            <div class="fm-opt">
+                <label for="ServiceName">Service Name:</label>
+                @Html.TextBoxFor(x => x.ServiceName, new { @class = "input-xl", placeholder = "eg. google.com" })
+                @Html.ValidationMessageFor(x => x.ServiceName)
+            </div>
+            <div class="fm-group fm-opt">
+                <label for="Key">Secret Word</label>
+                @Html.TextBoxFor(x => x.Key, new { @class = "input-xl" })
+                @Html.ValidationMessageFor(x => x.Key)
+            </div>
+            <div class="fm-actions cf">
+                <input type="submit" class="btn btn-primary btn-sign-in" value="Get SecurePass" />
+            </div>
+        </fieldset>
+    </section>
+}
+@if (!string.IsNullOrEmpty(Model.SecurePass))
+{
+    <div class="securepass-value">
+        @Html.DisplayFor(x => x.SecurePass)
+    </div>
+}
