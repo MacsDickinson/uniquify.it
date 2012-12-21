@@ -39,7 +39,7 @@ $('.securepass-submit').click(function(event) {
 	event.preventDefault();
 	
 	var secretword = $('.securepass-secretword', $(this).parents('.securepass-wrapper:first')).val();
-	var url = 'http://localhost:57181/Get';
+	var url = 'http://localhost:12077/Get';
 	/*
 	$.post(url, { key:secretword, value:document.domain }, function(password) {			
 		$('input:password', $(this).parents('.securepass-wrapper:first')).val(password);

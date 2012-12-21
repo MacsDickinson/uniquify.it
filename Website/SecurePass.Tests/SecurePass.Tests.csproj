@@ -6,7 +6,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{03C87BE2-824B-4CE8-905D-653911262F49}</ProjectGuid>
+    <ProjectGuid>{E96D0E0A-D8A4-4AD6-B1ED-8810D8EB711A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SecurePass.Tests</RootNamespace>
@@ -103,7 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SecurePass\SecurePass.csproj">
-      <Project>{CB120B4F-0C5A-492B-A733-9C172F8317F0}</Project>
+      <Project>{FB2BECB8-20E4-4FDE-95FB-D0CEDA2C54D7}</Project>
       <Name>SecurePass</Name>
     </ProjectReference>
   </ItemGroup>
