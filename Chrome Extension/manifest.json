@@ -1,8 +1,8 @@
 {
-	"name" : "Password1",
+	"name" : "SecurePass",
 	"version" : "0.1",
 	"description" : "Generates a password for the site you are currenly on",
-	"homepage_url": "http://www.macsentom.co.uk/Password1/",
+	"homepage_url": "http://www.macsentom.co.uk/SecurePass/",
 	"background": { 
 		"scripts": [
 			"scripts/background.js"
@@ -21,7 +21,7 @@
 	],
 	"page_action" : {
 		"default_icon": "icons/icon2_19.png",
-		"default_title" : "Password Generator Fetcher"
+		"default_title" : "Secure Password Generator"
 	},
 	"icons" : {
 		"16" : "icons/icon2_16.png",
