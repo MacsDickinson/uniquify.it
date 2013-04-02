@@ -61,6 +61,15 @@ body {
     margin: 10px auto 2px;
     word-wrap: break-word;
 }
+.answer-container {
+    display: block;
+    opacity: 0; 
+    height: 0;
+    overflow: hidden;
+    -webkit-transition: opacity 1s ease-out;
+    -moz-transition: opacity 1s ease-out;
+    -o-transition: opacity 1s ease-out;
+}
 .fm-actons {
     margin: 2px auto;
     max-width: 250px;
