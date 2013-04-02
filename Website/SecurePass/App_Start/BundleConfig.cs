@@ -13,7 +13,8 @@ namespace SecurePass
 
 			bundles.Add(new ScriptBundle("~/bundles/securepass").Include(
 						"~/Scripts/macsen.core.js",
-						"~/Scripts/securepass.js"));
+						"~/Scripts/securepass.js",
+						"~/Scripts/sha256.js"));
 
 			// Use the development version of Modernizr to develop with and learn from. Then, when you're
 			// ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

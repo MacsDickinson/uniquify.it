@@ -7,6 +7,13 @@
         $(function() {
             var securePass = new SecureClass();
             $('#getMemorable').click(function () {
+                generatePass('memorable');
+            });
+            $('#getSuper').click(function () {
+                generatePass('secure');
+            });
+            var generatePass = function (type) {
+                $('#securepass-result').text('');
                 $('.field-validation-valid').hide();
                 var domain = $('#ServiceName').val();
                 var key = $('#SecretWord').val();
@@ -16,13 +23,18 @@
                     return;
                 }
                 if (key.length > 7) {
-                    var result = securePass.generateMemorable(domain, key);
+                    var result;
+                    if (type === 'secure') {
+                        result = securePass.generateSecure(domain, key);
+                    } else {
+                        result = securePass.generateMemorable(domain, key);
+                    }
                     $('#securepass-result').text(result);
                 } else {
                     $('#key-val').text('Secret word needs to be at least 8 characters');
                     $('#key-val').show();
                 }
-            });
+            };
         });
     </script>
 }

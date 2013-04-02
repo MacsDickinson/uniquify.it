@@ -1,6 +1,4 @@
 ﻿using System.Web.Mvc;
-using System.Web.Services;
-using SecurePass.Models;
 
 namespace SecurePass.Controllers
 {

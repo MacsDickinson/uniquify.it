@@ -1,7 +1,7 @@
 ﻿SecureClass = Class.extend({
     generateSecure: function (domain, key) {
         domain = domain.split('.')[0];
-
+        return hex_hmac_sha256(key, domain);
     },
     generateMemorable: function (domain, key) {
         domain = domain.split('.')[0];
