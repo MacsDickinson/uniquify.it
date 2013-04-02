@@ -1,61 +1,117 @@
-﻿body {
+﻿::selection {
+    background: rgb(81, 177, 201);; /* Safari */
+    color: #f3f3f3;
+}
+::-moz-selection {
+    background: rgb(81, 177, 201);; /* Firefox */
+    color: #f3f3f3;
+}
+body {
     font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-family: 'Open Sans Condensed', sans-serif;
     color: #232323;
     background-color: #fff;
+    padding: 0;
+    margin: 0;
 }
-
 header, footer, nav, section {
     display: block;
 }
-
-
-/* Styles for basic forms
------------------------------------------------------------*/
-fieldset {
-    border: 1px solid #ddd;
-    padding: 0 1.4em 1.4em 1.4em;
-    margin: 0 0 1.5em 0;
+header {
+    background-color: #ffffff;
+    background-color: rgba(255,255,255,0.5);
 }
-
-legend {
-    font-size: 1.2em;
-    font-weight: bold;
+header, .answer-container{
+    color: rgb(81, 177, 201);
+    font-weight: 300;
+    margin: 0;
+    padding: 30px 0;
+    vertical-align: bottom;
+    text-align: center;
 }
-
-textarea {
-    min-height: 75px;
+h1 {
+    font-size: 5.4em;
+    font-weight: 300;
 }
-
-.editor-label {
-    margin: 1em 0 0 0;
+h2 {
+    font-size: 3.4em;
+    font-weight: 300;
 }
-
-.editor-field {
-    margin: 0.5em 0 0 0;
+h3 {
+    text-align: center;
 }
+body {
+    background-image: url(escheresque.png);
+}
+.form-container, .answer-container {
+    font-size: 1.4em;
+    background-color: #ffffff;
+    background-color: rgba(255,255,255,0.5);
+    padding: 5px 20px 10px 20px;
+    border-top: 4px solid rgb(81, 177, 201);;
+    border-bottom: 2px solid #555;
+    max-width: 500px;
+    margin: 10px auto 2px;
+    word-wrap: break-word;
+}
+.fm-actons {
+    margin: 2px auto;
+    max-width: 250px;
+}
+input[type=submit] {
+    margin: 2px auto;
+    background-color: #eeeeee;
+    border: 1px solid rgb(81, 177, 201);
+    text-decoration: none;
+    color: rgb(81, 177, 201);
+    cursor: pointer;
+    width: auto;
+    overflow: visible;
+    padding: 5px 10px 5px 7px;
+    line-height: 17px;
+    width: 100%;
+}
+    input[type=submit]:hover {
+        background-color: #d3d3d3;
+        border: 1px solid rgb(62, 135, 153);
+        color: rgb(62, 135, 153);
+    }
+.fm-q {
+    margin: 2px 0;
+}
+.fm-q label {
+    width: 30%;
+    display: inline-block;
+    text-align: right;
+    margin-right: 3px;
+}
+.fm-q input[type=text] {
+    width: 65%;
+    display: inline-block;
+    font-size: 1.1em;
+    padding: 4px 0;
+}
+@media only screen and (max-width: 330px) {
+    .fm-q label {
+        font-size: 0.76em
+    }
+    header, .answer-container {
+        padding: 10px 0;
 
-
+    }
+    h1 {
+        font-size: 3.4em;
+    }
+    h2 {
+        font-size: 1.4em;
+    }
+}
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error {
     color: #f00;
 }
-
-.field-validation-valid {
-    display: none;
-}
-
 .input-validation-error {
     border: 1px solid #f00;
     background-color: #fee;
-}
-
-.validation-summary-errors {
-    font-weight: bold;
-    color: #f00;
-}
-
-.validation-summary-valid {
-    display: none;
 }
