@@ -6,9 +6,22 @@
     <script type="text/javascript">
         $(function() {
             var securePass = new SecureClass();
-            $('#getMemorable').click(function() {
-                var result = securePass.generateMemorable($('#ServiceName').val(), $('#SecretWord').val());
-                $('#securepass-result').text(result);
+            $('#getMemorable').click(function () {
+                $('.field-validation-valid').hide();
+                var domain = $('#ServiceName').val();
+                var key = $('#SecretWord').val();
+                if (domain.length === 0) {
+                    $('#domain-val').text('Please enter a domain');
+                    $('#domain-val').show();
+                    return;
+                }
+                if (key.length > 7) {
+                    var result = securePass.generateMemorable(domain, key);
+                    $('#securepass-result').text(result);
+                } else {
+                    $('#key-val').text('Secret word needs to be at least 8 characters');
+                    $('#key-val').show();
+                }
             });
         });
     </script>
@@ -19,15 +32,15 @@
     <div class="fm-q">
         <label for="ServiceName">Service Name:</label>
         <input id="ServiceName" name="ServiceName" placeholder="eg. google.com" type="text" value="">
-        <span class="field-validation-valid" for="ServiceName"></span>
+        <span class="field-validation-valid" id="domain-val"></span>
     </div>
     <div class="fm-q">
         <label for="SecretWord">Secret Word</label>
         <input id="SecretWord" name="SecretWord" type="text" value="">
-        <span class="field-validation-valid" for="SecretWord"></span>
+        <span class="field-validation-valid" id="key-val"></span>
     </div>
     <div class="fm-actons">
-        <input type="submit" class="btn btn-primary btn-sign-in" id="getMemorable" value="Get Unique Memorable Password" />
+        <input type="submit" class="btn btn-primary btn-sign-in" id="getMemorable" value="Get Secure Password" />
         <input type="submit" class="btn btn-primary btn-sign-in" id="getSuper" value="Get Super Secure Password" />
     </div>
 </div>
