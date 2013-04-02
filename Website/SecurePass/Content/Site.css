@@ -1,9 +1,9 @@
 ﻿::selection {
-    background: rgb(81, 177, 201);; /* Safari */
+    background: rgb(81, 177, 201); /* Safari */
     color: #f3f3f3;
 }
 ::-moz-selection {
-    background: rgb(81, 177, 201);; /* Firefox */
+    background: rgb(81, 177, 201); /* Firefox */
     color: #f3f3f3;
 }
 body {
@@ -17,11 +17,11 @@ body {
 header, footer, nav, section {
     display: block;
 }
-header {
+header, footer {
     background-color: #ffffff;
     background-color: rgba(255,255,255,0.5);
 }
-header, .answer-container{
+header, .answer-container {
     color: rgb(81, 177, 201);
     font-weight: 300;
     margin: 0;
@@ -39,6 +39,13 @@ h2 {
 }
 h3 {
     text-align: center;
+}
+a {
+    color: rgb(81, 177, 201);
+    text-decoration: none;
+}
+a:hover {
+        color: rgb(62, 135, 153);
 }
 body {
     background-image: url(escheresque.png);
@@ -91,6 +98,50 @@ input[type=submit] {
     font-size: 1.1em;
     padding: 4px 0;
 }
+/* FOOTER
+    ------------------------------------------------------*/
+footer {
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+footer h2 {
+    font-size: 2.4em;
+	text-align: center;
+    color: rgb(81, 177, 201);
+}
+.footer-column {
+	margin: 0 auto;
+	display: block;
+	vertical-align: top;
+    max-width: 500px;
+}
+	.footer-column ul {
+		list-style-type: none;
+		-webkit-margin-before: 0;
+		-webkit-margin-after: 0;
+		-webkit-margin-start: 0;
+		-webkit-margin-end: 0;
+		-webkit-padding-start: 0;
+	}
+	.footer-column li {
+		text-align: center;
+	}
+.footer-column-3{
+	width: 33%
+}
+.footer-column-2 {
+	width: 49%;
+}
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
 @media only screen and (max-width: 330px) {
     .fm-q label {
         font-size: 0.76em
@@ -105,13 +156,17 @@ input[type=submit] {
     h2 {
         font-size: 1.4em;
     }
-}
-/* Styles for validation helpers
------------------------------------------------------------*/
-.field-validation-error {
-    color: #f00;
-}
-.input-validation-error {
-    border: 1px solid #f00;
-    background-color: #fee;
+	footer {
+		font-size:  0.9em;
+		margin: 0 auto;
+	}
+		.footer-column {
+			display: block;
+		}
+	.footer-column-3{
+		width: 100%
+	}
+	.footer-column-2 {
+		display: inline-block;
+	}
 }

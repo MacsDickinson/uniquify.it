@@ -11,7 +11,19 @@
     @Scripts.Render("~/bundles/securepass")
     @RenderSection("scripts", required: false)
 </head>
-<body>
-    @RenderBody()
-</body>
+    <body>
+        <a href="https://github.com/MacsDickinson/SecurePass"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+        <header>
+            <h1>SecurePass</h1>
+        </header>
+        @RenderBody()
+        <footer>
+		    <div id="footer-copyright" class="footer-column">
+		        <h2><a href="http://www.macsentom.co.uk/" title="Macs Dickinson">&copy; @DateTime.Now.Year Macs Dickinson</a></h2>
+			    <p>
+				    The information on this page is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/" rel="license">Creative Commons Attribution 3.0 Unported License</a>. Feel free to share liberally but provide attribution.
+			    </p>
+		    </div>
+        </footer>
+    </body>
 </html>
