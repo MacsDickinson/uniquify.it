@@ -1,36 +1,34 @@
-﻿@model SecurePass.Models.PassCode
-
-@{
+﻿@{
     ViewBag.Title = "title";
     Layout = "../Shared/_Layout.cshtml";
 }
-
-<h2>SecurePass</h2>
-
-@using (Html.BeginForm("Index", "Home", FormMethod.Post))
-{
-    <section class="panel">
-        <fieldset>
-            <h1>Get Your Secure Password:</h1>
-            <div class="fm-opt">
-                <label for="ServiceName">Service Name:</label>
-                @Html.TextBoxFor(x => x.ServiceName, new { @class = "input-xl", placeholder = "eg. google.com" })
-                @Html.ValidationMessageFor(x => x.ServiceName)
-            </div>
-            <div class="fm-group fm-opt">
-                <label for="Key">Secret Word</label>
-                @Html.TextBoxFor(x => x.Key, new { @class = "input-xl" })
-                @Html.ValidationMessageFor(x => x.Key)
-            </div>
-            <div class="fm-actions cf">
-                <input type="submit" class="btn btn-primary btn-sign-in" value="Get SecurePass" />
-            </div>
-        </fieldset>
-    </section>
+@section scripts {
+    <script type="text/javascript">
+        $(function() {
+            var securePass = new SecureClass();
+            $('#getMemorable').click(function() {
+                var result = securePass.generateMemorable($('#ServiceName').val(), $('#SecretWord').val());
+                $('#securepass-result').text(result);
+            });
+        });
+    </script>
 }
-@if (!string.IsNullOrEmpty(Model.SecurePass))
-{
-    <div class="securepass-value">
-        @Html.DisplayFor(x => x.SecurePass)
+<h1>SecurePass</h1>
+<div class="form-container">
+    <h2>Get Your Secure Password:</h2>
+    <div class="fm-q">
+        <label for="ServiceName">Service Name:</label>
+        <input id="ServiceName" name="ServiceName" placeholder="eg. google.com" type="text" value="">
+        <span class="field-validation-valid" for="ServiceName"></span>
     </div>
-}
+    <div class="fm-q">
+        <label for="SecretWord">Secret Word</label>
+        <input id="SecretWord" name="SecretWord" type="text" value="">
+        <span class="field-validation-valid" for="SecretWord"></span>
+    </div>
+    <div class="fm-actons">
+        <input type="submit" class="btn btn-primary btn-sign-in" id="getMemorable" value="Get Unique Memorable Password" />
+        <input type="submit" class="btn btn-primary btn-sign-in" id="getSuper" value="Get Super Secure Password" />
+    </div>
+</div>
+<span id="securepass-result"></span>
