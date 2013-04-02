@@ -17,25 +17,37 @@ body {
 header, footer, nav, section {
     display: block;
 }
-header, footer {
+header, footer, section {
     background-color: #ffffff;
     background-color: rgba(255,255,255,0.5);
 }
-header, .answer-container {
-    color: rgb(81, 177, 201);
+header, .answer-container, section, footer {
     font-weight: 300;
     margin: 0;
-    padding: 30px 0;
     vertical-align: bottom;
     text-align: center;
 }
+section {
+    padding: 10px;
+    margin: 10px 0;
+}
+section p {
+    font-size: 1.2em;
+}
+header, .answer-container {
+    color: rgb(81, 177, 201);
+    padding: 30px 0;
+}
 h1 {
+    color: rgb(81, 177, 201);
     font-size: 5.4em;
     font-weight: 300;
 }
 h2 {
+    color: rgb(81, 177, 201);
     font-size: 3.4em;
     font-weight: 300;
+    margin: 10px 0;
 }
 h3 {
     text-align: center;
@@ -58,7 +70,7 @@ body {
     border-top: 4px solid rgb(81, 177, 201);;
     border-bottom: 2px solid #555;
     max-width: 500px;
-    margin: 10px auto 2px;
+    margin: 10px auto;
     word-wrap: break-word;
 }
 .answer-container {

@@ -18,8 +18,8 @@
                 var domain = $('#ServiceName').val();
                 var key = $('#SecretWord').val();
                 if (domain.length === 0) {
-                    $('#domain-val').text('Please enter a domain');
-                    $('#domain-val').show();
+                    $('.field-validation-error').text('Please enter a domain');
+                    $('.field-validation-error').show();
                     return;
                 }
                 if (key.length > 7) {
@@ -31,8 +31,8 @@
                     }
                     $('#securepass-result').text(result);
                 } else {
-                    $('#key-val').text('Secret word needs to be at least 8 characters');
-                    $('#key-val').show();
+                    $('.field-validation-error').text('Secret word needs to be at least 8 characters');
+                    $('.field-validation-error').show();
                     return;
                 }
                 $('.answer-container').css('opacity', 1);
@@ -44,14 +44,13 @@
 <div class="form-container">
     <h3>Get Your Secure Password:</h3>
     <div class="fm-q">
-        <label for="ServiceName">Service Name:</label>
+        <label for="ServiceName">Domain Name:</label>
         <input id="ServiceName" name="ServiceName" placeholder="eg. google.com" type="text" value="">
-        <span class="field-validation-error" id="domain-val"></span>
     </div>
     <div class="fm-q">
         <label for="SecretWord">Secret Word:</label>
         <input id="SecretWord" name="SecretWord" type="text" value="">
-        <span class="field-validation-error" id="key-val"></span>
+        <span class="field-validation-error"></span>
     </div>
     <div class="fm-actons">
         <input type="submit" id="getMemorable" value="Get Secure Password" />
