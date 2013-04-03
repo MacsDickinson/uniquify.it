@@ -21,50 +21,43 @@ if ($("input:password").length) {
 			'<h1>SecurePass</h1>'+
 			'<h3>Enter your Secret Word:</h3>'+
 			'<input type="text" placeholder="Secret Word..." class="securepass-secretword" id="securepass-secretword" />'+
-			'<input type="submit" text="Submit" class="securepass-submit" /></div>');
+			'<input type="submit" text="Submit" class="securepass-submit" id="getMemorable"/></div>');
 	});
 	
 	$("a[rel*=leanModal]").leanModal();
 	chrome.extension.sendRequest({}, function(response) {});
 } else {
 }
-
 $('.securepass-btn').click(function(event) {
 	event.preventDefault();
 	$('.securepass-secretword', $(this).parents('.securepass-wrapper:first')).val("");
 	clickedPassID = $('.securepass-click', $(this).parents('.securepass-wrapper:first')).attr('name');
 	$('.securepass-click', $(this).parents('.securepass-wrapper:first')).click();
 });
-$('.securepass-submit').click(function(event) {
-	event.preventDefault();
-	
+var securePass = new SecureClass();
+$('#getMemorable').click(function () {
 	var secretword = $('.securepass-secretword', $(this).parents('.securepass-wrapper:first')).val();
-	var url = 'http://localhost:12077/Get';
-	/*
-	$.post(url, { key:secretword, value:document.domain }, function(password) {			
-		$('input:password', $(this).parents('.securepass-wrapper:first')).val(password);
-		$("#lean_overlay").click();
-	})
-	.error(function() { 
-		alert("Service Offline");
-		$("#lean_overlay").click();
-	});
-	*/
-	$.ajax({
-		url: url,
-		data: '{ key: "' + secretword + '", value : "' + document.domain + '" }',
-		success: function(password) {			
-			$('input:password', $('#'+clickedPassID).parents('.securepass-wrapper:first')).val(password);
-			$("#lean_overlay").click();
-		},
-		failure: function(error) {
-			alert('oh Shit: ' + error.d);
-			$("#lean_overlay").click();
-		},
-		404: function() {
-			alert("Service Offline");
-			$("#lean_overlay").click();
-		}
-	});
-	
+	generatePass('memorable', document.domain, secretword);
 });
+$('#getSuper').click(function () {
+	var secretword = $('.securepass-secretword', $(this).parents('.securepass-wrapper:first')).val();
+	generatePass('secure', document.domain, secretword);
+});
+var generatePass = function (type, domain, key) {
+	$('.securepass-error').hide();
+	if (key.length > 7) {
+		var result;
+		if (type === 'secure') {
+			result = securePass.generateSecure(domain, key);
+		} else {
+			result = securePass.generateMemorable(domain, key);
+		}
+		$('input:password', $('#'+clickedPassID).parents('.securepass-wrapper:first')).val(result);
+		$("#lean_overlay").click();
+		alert(result);
+	} else {
+		$('.securepass-error').text('Secret word needs to be at least 8 characters');
+		$('.securepass-error').show();
+		return;
+	}
+};
