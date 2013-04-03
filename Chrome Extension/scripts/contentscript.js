@@ -20,11 +20,11 @@ if ($("input:password").length) {
 		$(this).after('<div id="securepass-popup'+index+'" class="securepass-popup" >'+
 			'<h1>SecurePass</h1>'+
 			'<h3>Enter your Secret Word:</h3>'+
-			'<div class="fm-q">'+
+			'<div class="securepass-q">'+
 				'<input id="securepass-secretword" placeholder="Secret Word..." class="securepass-secretword" name="SecretWord" type="text" value="">'+
 				'<span class="securepass-error"></span>'+
 			'</div>'+
-			'<div class="fm-actons">'+
+			'<div class="securepass-actons">'+
 				'<input type="submit" id="getMemorable" value="Get Secure Password" />'+
 				'<input type="submit" id="getSuper" value="Get Super Secure Password" />'+
 			'</div></div>');
