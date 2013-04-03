@@ -2,6 +2,10 @@ var clickedPassID;
 
 if ($("input:password").length) {
 	$("input:password").each(function(index) {
+		if ($(this).attr('id') === undefined) {
+			$(this).attr('id', 'securepass' + index);
+		}
+		var id = $(this).attr('id');
 		
 		$(this).wrap('<div class="securepass-wrapper"></div>');
 		$(this).before('<input type="image" src="https://dl.dropbox.com/u/10918652/icon2_128.png" class="securepass-btn"/>');
@@ -17,7 +21,7 @@ if ($("input:password").length) {
 			right: 0,
 			width: pwheight
 		});
-		$(this).after('<div id="securepass-popup'+index+'" class="securepass-popup" >'+
+		$('body').append('<div id="securepass-popup'+index+'" class="securepass-popup" >'+
 			'<h1>SecurePass</h1>'+
 			'<h3>Enter your Secret Word:</h3>'+
 			'<div class="securepass-q">'+
@@ -25,8 +29,8 @@ if ($("input:password").length) {
 				'<span class="securepass-error"></span>'+
 			'</div>'+
 			'<div class="securepass-actons">'+
-				'<input type="submit" id="getMemorable" value="Get Secure Password" />'+
-				'<input type="submit" id="getSuper" value="Get Super Secure Password" />'+
+				'<input type="submit" class="getMemorable" for="'+id+'" value="Get Secure Password" />'+
+				'<input type="submit" class="getSuper" for="'+id+'" value="Get Super Secure Password" />'+
 			'</div></div>');
 	});
 	
@@ -41,14 +45,23 @@ $('.securepass-btn').click(function(event) {
 	$('.securepass-click', $(this).parents('.securepass-wrapper:first')).click();
 });
 var securePass = new SecureClass();
-$('#getMemorable').click(function () {
-	var secretword = $('.securepass-secretword', $(this).parents('.securepass-wrapper:first')).val();
-	generatePass('memorable', document.domain, secretword);
+$('.getMemorable').click(function () {
+	var pass = $(this).attr('for');
+	var secretword = $('.securepass-secretword', $(this).parents('.securepass-popup:first')).val();
+	submitPass('memorable', document.domain, secretword, pass);
 });
-$('#getSuper').click(function () {
-	var secretword = $('.securepass-secretword', $(this).parents('.securepass-wrapper:first')).val();
-	generatePass('secure', document.domain, secretword);
+$('.getSuper').click(function () {
+	var pass = $(this).attr('for');
+	var secretword = $('.securepass-secretword', $(this).parents('.securepass-popup:first')).val();
+	submitPass('secure', document.domain, secretword, pass);
 });
+var submitPass = function (type, domain, key, input) {
+	var result = generatePass(type, domain, key);
+	if (result) {
+		$('#'+input).val(result);
+		$("#lean_overlay").click();
+	}
+}
 var generatePass = function (type, domain, key) {
 	$('.securepass-error').hide();
 	if (key.length > 7) {
@@ -58,8 +71,7 @@ var generatePass = function (type, domain, key) {
 		} else {
 			result = securePass.generateMemorable(domain, key);
 		}
-		$('input:password', $('#'+clickedPassID).parents('.securepass-wrapper:first')).val(result);
-		$("#lean_overlay").click();
+		return result;
 	} else {
 		$('.securepass-error').text('Secret word needs to be at least 8 characters');
 		$('.securepass-error').show();
