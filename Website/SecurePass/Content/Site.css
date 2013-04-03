@@ -34,8 +34,10 @@ section {
 section p {
     font-size: 1.2em;
 }
-header, .answer-container {
+header, .answer-container  {
     color: rgb(81, 177, 201);
+}
+header {
     padding: 30px 0;
 }
 h1 {
@@ -66,8 +68,7 @@ body {
     font-size: 1.4em;
     background-color: #ffffff;
     background-color: rgba(255,255,255,0.5);
-    padding: 5px 20px 10px 20px;
-    border-top: 4px solid rgb(81, 177, 201);;
+    border-top: 4px solid rgb(81, 177, 201);
     border-bottom: 2px solid #555;
     max-width: 500px;
     margin: 10px auto;
@@ -80,28 +81,31 @@ body {
     overflow: hidden;
     -webkit-transition: opacity 1s ease-out;
     -moz-transition: opacity 1s ease-out;
+    -ms-transition: opacity 1s ease-out;
     -o-transition: opacity 1s ease-out;
 }
 .fm-actons {
-    margin: 2px auto;
-    max-width: 250px;
+    margin: 10px auto 0;
 }
 input[type=submit] {
-    margin: 2px auto;
+    font-size: 1.1em;
+    margin: 0 auto;
     background-color: #eeeeee;
-    border: 1px solid rgb(81, 177, 201);
+    border-top: 2px solid rgb(81, 177, 201);
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
     text-decoration: none;
     color: rgb(81, 177, 201);
     cursor: pointer;
-    width: auto;
     overflow: visible;
-    padding: 5px 10px 5px 7px;
-    line-height: 17px;
+    padding: 5px 15px 5px 20px;
     width: 100%;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 700;
 }
     input[type=submit]:hover {
         background-color: #d3d3d3;
-        border: 1px solid rgb(62, 135, 153);
         color: rgb(62, 135, 153);
     }
 .fm-q {

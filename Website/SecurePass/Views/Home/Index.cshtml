@@ -14,6 +14,8 @@
             });
             var generatePass = function (type) {
                 $('#securepass-result').text('');
+                $('.answer-container').css('opacity', 0);
+                $('.answer-container').css('height', 0);
                 $('.field-validation-error').hide();
                 var domain = $('#ServiceName').val();
                 var key = $('#SecretWord').val();
@@ -42,7 +44,7 @@
     </script>
 }
 <div class="form-container">
-    <h3>Get Your Secure Password:</h3>
+    <h3>Generate Your Secure Password:</h3>
     <div class="fm-q">
         <label for="ServiceName">Domain Name:</label>
         <input id="ServiceName" name="ServiceName" placeholder="eg. google.com" type="text" value="">
