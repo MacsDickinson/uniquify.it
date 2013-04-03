@@ -35,8 +35,5 @@
 		"48" : "icons/icon_48.png",
 		"128" : "icons/icon_128.png"
 	},
-	"permissions": [
-		"tabs"
-	],
 	"manifest_version" : 2
 }
