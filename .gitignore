@@ -12,6 +12,8 @@ TestResults
 *.suo
 *.user
 *.sln.docstates
+*.pubxml
+*.pubxml.user
 
 # Build results
 [Dd]ebug/
