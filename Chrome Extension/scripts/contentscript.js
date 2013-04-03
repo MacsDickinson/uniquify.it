@@ -20,8 +20,14 @@ if ($("input:password").length) {
 		$(this).after('<div id="securepass-popup'+index+'" class="securepass-popup" >'+
 			'<h1>SecurePass</h1>'+
 			'<h3>Enter your Secret Word:</h3>'+
-			'<input type="text" placeholder="Secret Word..." class="securepass-secretword" id="securepass-secretword" />'+
-			'<input type="submit" text="Submit" class="securepass-submit" id="getMemorable"/></div>');
+			'<div class="fm-q">'+
+				'<input id="securepass-secretword" placeholder="Secret Word..." class="securepass-secretword" name="SecretWord" type="text" value="">'+
+				'<span class="securepass-error"></span>'+
+			'</div>'+
+			'<div class="fm-actons">'+
+				'<input type="submit" id="getMemorable" value="Get Secure Password" />'+
+				'<input type="submit" id="getSuper" value="Get Super Secure Password" />'+
+			'</div></div>');
 	});
 	
 	$("a[rel*=leanModal]").leanModal();
@@ -54,7 +60,6 @@ var generatePass = function (type, domain, key) {
 		}
 		$('input:password', $('#'+clickedPassID).parents('.securepass-wrapper:first')).val(result);
 		$("#lean_overlay").click();
-		alert(result);
 	} else {
 		$('.securepass-error').text('Secret word needs to be at least 8 characters');
 		$('.securepass-error').show();
