@@ -32,6 +32,9 @@ section {
     margin: 10px 0;
 }
 section p {
+    text-align: justify;
+    margin: 0 auto;
+    max-width: 500px;
     font-size: 1.2em;
 }
 header, .answer-container  {
