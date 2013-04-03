@@ -9,7 +9,7 @@
 }
 .securepass-wrapper{
 	position: relative;
-	border: 3px lime solid;
+	border: 3px rgb(81, 177, 201) solid;
 	overflow: hidden;
 }
 .securepass-popup{

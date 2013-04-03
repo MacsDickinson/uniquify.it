@@ -1,6 +1,6 @@
 {
 	"name" : "SecurePass",
-	"version" : "0.1",
+	"version" : "0.0.1",
 	"description" : "Generates a password for the site you are currenly on",
 	"homepage_url": "http://www.macsentom.co.uk/SecurePass/",
 	"background": { 

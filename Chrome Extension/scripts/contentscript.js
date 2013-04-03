@@ -8,7 +8,7 @@ if ($("input:password").length) {
 		var id = $(this).attr('id');
 		
 		$(this).wrap('<div class="securepass-wrapper"></div>');
-		$(this).before('<input type="image" src="https://dl.dropbox.com/u/10918652/icon2_128.png" class="securepass-btn"/>');
+		$(this).before('<input type="image" src="http://macsentom.co.uk/docs/securepass_48.png" class="securepass-btn"/>');
 		$(this).before('<a class="securepass-click" rel="leanModal" name="securepass-popup'+index+'" href="#securepass-popup'+index+'" />');
 		$(this).parent('.securepass-wrapper:first').css({
 			width: $(this).width()
