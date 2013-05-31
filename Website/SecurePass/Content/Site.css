@@ -95,6 +95,10 @@ body {
     margin: 0 12px;
     display: inline-block;
     width: 40%;
+    vertical-align: middle;
+}
+.fm-slider-label {
+    vertical-align: middle;
 }
 input[type=submit] {
     font-size: 1.1em;
@@ -119,6 +123,7 @@ input[type=submit] {
     }
 .fm-q {
     margin: 2px 0;
+    min-height: 33px;
 }
 .fm-q label {
     width: 30%;
