@@ -91,6 +91,11 @@ body {
 .fm-actons {
     margin: 10px auto 0;
 }
+.fm-slider {
+    margin: 0 12px;
+    display: inline-block;
+    width: 40%;
+}
 input[type=submit] {
     font-size: 1.1em;
     margin: 0 auto;

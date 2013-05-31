@@ -1,20 +1,48 @@
 ﻿SecureClass = Class.extend({
-    generateSecure: function (domain, key) {
-        domain = domain.split('.')[0];
-        return hex_hmac_sha256(key, domain);
-    },
-    generateMemorable: function (domain, key) {
-        domain = domain.split('.')[0];
-        var dLen = domain.length;
-        var kLen = key.length;
-        var pad = "0000000";
-        var dChar = (pad.substring(0, pad.length - domain.length) + domain).split('');
-        var kChar = (pad.substring(0, pad.length - key.length) + key).split('');
+    generateSecurePass: function(domain, key, length, includeSpecial) {
+        var hash = hex_hmac_sha256(key, domain);
+        $('#hash').text(hash);
+        var chars = [];
+        var special = [];
+        if (includeSpecial) {
 
-        var char1 = dLen % 7;
-        var char2 = kLen % 7;
-        var char3 = (dLen * kLen) % 7;
-        var char4 = Math.ceil((dLen / kLen) * 100) % 7;
-        return dChar[char1] + dChar[char2] + kChar[char1] + kChar[char2] + dLen + kChar[char3] + kChar[char4] + dChar[char3] + dChar[char4];
+            special = ['!', '£', '$', '%', '&', '*', '@', '~', '#', '.', '<', '>', '?', ';', ':', '_', '+'];
+            chars = chars.concat(special);
+        }
+        chars = chars.concat(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0']);
+        var bytes = [];
+        for (var i = 0; i < hash.length; ++i) {
+            bytes.push(hash.charCodeAt(i));
+        }
+        var pass = [];
+        for (var k = 0; k < bytes.length; ++k) {
+            pass.push(chars[(bytes[k] * (k + 1)) % chars.length]);
+        }
+        var result = "";
+        for (var j = 0; j < pass.length; j++) {
+            result += pass[j];
+        }
+
+        var securepass = result.substring((result.length - length) / 2, ((result.length - length) / 2) + length);
+
+        if (includeSpecial) {
+            var found = false;
+            for (var s = 0; s < special.length; ++s) {
+                if (securepass.indexOf(special[s]) !== -1) {
+                    found = true;
+                }
+            }
+            if (!found) {
+                securepass = securepass.replaceAt(bytes[key.length % bytes.length] % length, special[domain.length % special.length]);
+
+                $('#something').text(special[domain.length % special.length] + ' added to position ' + bytes[key.length % bytes.length] % length);
+            }
+        }
+
+        return securepass;
     }
-})
+});
+
+String.prototype.replaceAt = function(index, character) {
+    return this.substr(0, index) + character + this.substr(index + character.length);
+};

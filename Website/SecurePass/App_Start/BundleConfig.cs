@@ -9,7 +9,8 @@ namespace SecurePass
 		public static void RegisterBundles(BundleCollection bundles)
 		{
 			bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-						"~/Scripts/jquery-{version}.js"));
+						"~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-ui-{version}.js"));
 
 			bundles.Add(new ScriptBundle("~/bundles/securepass").Include(
 						"~/Scripts/macsen.core.js",
@@ -21,7 +22,8 @@ namespace SecurePass
 			bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
 						"~/Scripts/modernizr-*"));
 
-			bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+			bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Content/site.css"));
 		}
 	}
 }

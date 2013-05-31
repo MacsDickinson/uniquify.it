@@ -4,34 +4,46 @@
 }
 @section scripts {
     <script type="text/javascript">
-        $(function() {
+        $(function () {
+            $("#password-slider").slider({
+                range: "max",
+                min: 8,
+                max: 24,
+                value: 8,
+                slide: function (event, ui) {
+                    $("#PasswordLength").text(ui.value);
+                }
+            });
+            $("#PasswordLength").text($("#password-slider").slider("value"));
+            $("#PasswordLength").change(function () {
+                if (7 < parseInt(this.value) & parseInt(this.value) < 25 ) {
+                    $("#password-slider").slider("value", this.value);
+                } else if (8 > parseInt(this.value)) {
+                    this.value = 8;
+                } else if (parseInt(this.value) > 24 ) {
+                    this.value = 24;
+                }
+            });
             var securePass = new SecureClass();
-            $('#getMemorable').click(function () {
-                generatePass('memorable');
+            $('#getPass').click(function () {
+                generatePass();
             });
-            $('#getSuper').click(function () {
-                generatePass('secure');
-            });
-            var generatePass = function (type) {
+            var generatePass = function () {
                 $('#securepass-result').text('');
                 $('.answer-container').css('opacity', 0);
                 $('.answer-container').css('height', 0);
                 $('.field-validation-error').hide();
                 var domain = $('#ServiceName').val();
                 var key = $('#SecretWord').val();
+                var length = $("#password-slider").slider("value");
+                var special = $("#IncluseSpecial").is(':checked');
                 if (domain.length === 0) {
                     $('.field-validation-error').text('Please enter a domain');
                     $('.field-validation-error').show();
                     return;
                 }
                 if (key.length > 7) {
-                    var result;
-                    if (type === 'secure') {
-                        result = securePass.generateSecure(domain, key);
-                    } else {
-                        result = securePass.generateMemorable(domain, key);
-                    }
-                    $('#securepass-result').text(result);
+                    $('#securepass-result').text(securePass.generateSecurePass(domain, key, length, special));
                 } else {
                     $('.field-validation-error').text('Secret word needs to be at least 8 characters');
                     $('.field-validation-error').show();
@@ -52,11 +64,19 @@
     <div class="fm-q">
         <label for="SecretWord">Secret Word:</label>
         <input id="SecretWord" name="SecretWord" type="text" value="">
-        <span class="field-validation-error"></span>
     </div>
+    <div class="fm-q">
+        <label for="PasswordLength">Password Length:</label>
+        <div id="password-slider" class="fm-slider"></div>
+        <span id="PasswordLength"/>
+    </div>
+    <div class="fm-q">
+        <label for="IncluseSpecial">Secret Word:</label>
+        <input id="IncluseSpecial" name="IncluseSpecial" type="checkbox" checked="checked">
+    </div>
+    <span class="field-validation-error"></span>
     <div class="fm-actons">
-        <input type="submit" id="getMemorable" value="Get Secure Password" />
-        <input type="submit" id="getSuper" value="Get Super Secure Password" />
+        <input type="submit" id="getPass" value="Get Secure Password" />
     </div>
 </div>
 <div class="answer-container">
