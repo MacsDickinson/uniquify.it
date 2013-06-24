@@ -1,3 +1,13 @@
+.securepass-h3 {
+	text-align: center;
+	display: block;
+	font-size: 1.17em;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	font-weight: bold;
+}
 .securepass-btn {
 	position: absolute !important;
 	z-index: 100 !important;
@@ -14,13 +24,13 @@
 }
 .securepass-popup{
 	font-size: 1.4em;
-    background-color: #ffffff;
-    background-color: rgba(255,255,255,0.9);
-    border-top: 4px solid rgb(81, 177, 201);
-    border-bottom: 2px solid #555;
-    max-width: 500px;
-    margin: 10px auto;
-    word-wrap: break-word;
+	background-color: #fff;
+	background-color: rgba(255,255,255,.9);
+	border-top: 4px solid #51b1c9;
+	border-bottom: 2px solid #555;
+	width: 500px;
+	margin: 10px auto;
+	word-wrap: break-word;
 	display: none;
 	font-family: 'Open Sans Condensed', sans-serif !important;
 }
@@ -63,13 +73,19 @@
     }
 .securepass-q {
     margin: 2px 0;
+    min-height: 33px;
+}
+.securepass-q label {
+    width: 30%;
+    display: inline-block;
+    text-align: right;
+    margin-right: 3px;
 }
 .securepass-q input[type=text] {
-    display: inline-block !important;
-    font-size: 1.1em !important;
-    padding: 4px 0 !important;
-	width: 90% !important;
-	margin: 15px !important;
+    width: 65%;
+    display: inline-block;
+    font-size: 1.1em;
+    padding: 4px 0;
 }
 .securepass-click{
 	display: none;
