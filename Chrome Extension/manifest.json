@@ -14,12 +14,13 @@
 				"https://*/*"
 			],
 			"js" : [	"scripts/jquery-1.6.1.min.js", 
-						"scripts/jquery.leanModal.min.js", 
+						"scripts/jquery.leanModal.min.js",
+						"scripts/webfont.js",
 						"scripts/macsen.core.js", 
 						"scripts/sha256.js", 
 						"scripts/securepass.js", 
 						"scripts/contentscript.js"],
-			"css" : ["styles/contentscript.css"],
+			"css" : [	"styles/contentscript.css"],
 			"run_at" : "document_idle",
 			"all_frames" : false
 		}
@@ -35,5 +36,6 @@
 		"48" : "icons/icon_48.png",
 		"128" : "icons/icon_128.png"
 	},
-	"manifest_version" : 2
+	"manifest_version" : 2,
+    "permissions": ["http://fonts.googleapis.com/*"] 
 }

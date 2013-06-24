@@ -1,5 +1,11 @@
 var clickedPassID;
 
+WebFont.load({
+    google: {
+      families: ['Open Sans Condensed:300,700']
+    }
+  });
+
 if ($("input:password").length) {
 	$("input:password").each(function(index) {
 		if ($(this).attr('id') === undefined) {
