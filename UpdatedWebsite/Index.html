@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Uniquify.it</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet" type="text/css">
+    <link href="css/site.css" rel="stylesheet" />
+    <script type="text/javascript" src="js/modernizr-2.5.3.js" />
+    
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    
+</head>
+    <body>
+        <a href="https://github.com/MacsDickinson/uniquify.it"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+        <header>
+            <h1>Uniquify<span>.it</span></h1>
+        </header>
+        <div class="form-container">
+            <h3>Generate Your Secure Password:</h3>
+            <div class="fm-q">
+                <label for="ServiceName">Domain Name:</label>
+                <input id="ServiceName" name="ServiceName" placeholder="eg. google.com" type="text" value="">
+            </div>
+            <div class="fm-q">
+                <label for="SecretWord">Secret Word:</label>
+                <input id="SecretWord" name="SecretWord" type="text" value="">
+            </div>
+            <div class="fm-q">
+                <label for="PasswordLength">Password Length:</label>
+                <div id="password-slider" class="fm-slider"></div>
+                <span id="PasswordLength" class="fm-slider-label"/>
+            </div>
+            <div class="fm-q">
+                <label for="IncluseSpecial">Special Characters:</label>
+                <input id="IncluseSpecial" name="IncluseSpecial" type="checkbox" checked="checked">
+            </div>
+            <span class="field-validation-error"></span>
+            <div class="fm-actons">
+                <input type="submit" id="getPass" value="Get Secure Password" />
+            </div>
+        </div>
+        <div class="answer-container">
+            <h2 id="securepass-result"></h2>
+        </div>
+        <section>
+            <h2>What is it?</h2>
+            <p>
+                These days one of the most exploited threats to personal online security is password re-use. Uniquify.it attempts to solve this problem by making it simple to use a unique, secure password for every different site you log into, without having to memorize a huge list of convoluted password combinations. Uniquify.it transforms your secret word into a secure password that is unique to each domain you log into. This means that all you need to remember is your secret word; no more password protected documents containing lists of secure passwords and no more online password managers that could potentially be hacked. 
+            </p>
+            <p>
+                Uniquify.it generates your unique password within your browser rather than somewhere in ‘The Cloud’. This means that your secret word and your password are not transferred over the internet, making it impossible for hackers to intercept - unless they are stood behind you, with a video phone, filming your fingers typing.  
+            </p>
+            <p>
+                If the unexpected happens and one of your accounts is compromised, the hackers won’t be able to access your other accounts as each website has its own unique password. Uniquify.it uses an industry standard algorithm to generate your password which means there is no danger of hackers recovering your secret word.
+            </p>
+        </section>
+        <section>
+            <h2>How do I use it?</h2>
+            <p>
+                Using Uniquify.it is simple. Uniquify.it is currently only available through this website, however a Google Chrome extension is in development which will allow users to simpler enter your secret word on any log-in page. 
+            </p>
+            <p>
+                For more information and updates about uniquify.it, see my <a href="http://www.macsdickinson.com" title="Macs Dickinson" >blog</a>.
+            </p>
+            <!--Well first of all you can test how it 
+                works on this site, enter the domain for the site you’re logging in 
+                to and your secret word and see what happens. But you don’t want to 
+                be coming onto this site every time you need to log in to something 
+                so go ahead and install our <a href="https://chrome.google.com/webstore/detail/securepass/jmlefpoknlahkhbigofglcbmpkikandd" title="uniquify.it in the web store" target="_blank">Google Chrome extension</a>. This plugin attaches 
+                to your browser giving you the option to use uniquify.it directly in 
+                the sites you know. Not using Google Chrome? Have no fear, install our 
+                bookmarklet to convert the password for you.-->
+        </section>
+        <!--
+            <section>
+                <h2>Using the Chrome Extension</h2>
+                <p>
+                    Installing the Google Chrome extension is by far the easiest way to use uniquify.it.
+                </p>
+                <ol>
+                    <li>Head over to the <a href="https://chrome.google.com/webstore/detail/securepass/jmlefpoknlahkhbigofglcbmpkikandd" title="uniquify.it in the web store" target="_blank">Google Chrome web store</a> and install the extension.</li>
+                    <li>Once installed all login boxes will be wrapped by the SecurePass login box. To open uniquify.it click on the key icon.</li>
+                    <li>This opens the uniquify.it modal. Enter your keyword here and select to generate either the secure password or super secure password.</li>
+                    <li>uniquify.it will insert the secure password into the password box, all you need to do now is click log in.</li>
+                </ol>
+            </section>
+        -->
+
+        <footer>
+		    <div id="footer-copyright" class="footer-column">
+		        <h2><a href="http://www.macsentom.co.uk/" title="Macs Dickinson">&copy; @DateTime.Now.Year Macs Dickinson</a></h2>
+			    <p>
+				    The information on this page is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/" rel="license">Creative Commons Attribution 3.0 Unported License</a>. Feel free to share liberally but provide attribution.
+			    </p>
+		    </div>
+        </footer>
+        <script type="text/javascript" src="js/jquery-1.7.1.min.js" />
+        <script type="text/javascript" src="js/jquery-ui-1.10.3.min.js" />
+        <script type="text/javascript" src="js/macsen.core.js" />
+        <script type="text/javascript" src="js/sha256.js" />
+        <script type="text/javascript" src="js/securepass.js" />
+            <script type="text/javascript">
+                $(function () {
+                    $("#password-slider").slider({
+                        range: "max",
+                        min: 8,
+                        max: 24,
+                        value: 8,
+                        slide: function (event, ui) {
+                            $("#PasswordLength").text(ui.value);
+                        }
+                    });
+                    $("#PasswordLength").text($("#password-slider").slider("value"));
+                    $("#PasswordLength").change(function () {
+                        if (7 < parseInt(this.value) & parseInt(this.value) < 25 ) {
+                            $("#password-slider").slider("value", this.value);
+                        } else if (8 > parseInt(this.value)) {
+                            this.value = 8;
+                        } else if (parseInt(this.value) > 24 ) {
+                            this.value = 24;
+                        }
+                    });
+                    var securePass = new SecureClass();
+                    $('#getPass').click(function () {
+                        generatePass();
+                    });
+                    var generatePass = function () {
+                        $('#securepass-result').text('');
+                        $('.answer-container').css('opacity', 0);
+                        $('.answer-container').css('height', 0);
+                        $('.field-validation-error').hide();
+                        var domain = $('#ServiceName').val();
+                        var key = $('#SecretWord').val();
+                        var length = $("#password-slider").slider("value");
+                        var special = $("#IncluseSpecial").is(':checked');
+                        if (domain.length === 0) {
+                            $('.field-validation-error').text('Please enter a domain');
+                            $('.field-validation-error').show();
+                            return;
+                        }
+                        if (key.length > 7) {
+                            $('#securepass-result').text(securePass.generateSecurePass(domain, key, length, special));
+                        } else {
+                            $('.field-validation-error').text('Secret word needs to be at least 8 characters');
+                            $('.field-validation-error').show();
+                            return;
+                        }
+                        $('.answer-container').css('opacity', 1);
+                        $('.answer-container').css('height', 'auto');
+                    };
+                });
+            </script>
+    </body>
+</html>
