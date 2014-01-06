@@ -1,16 +1,19 @@
-﻿namespace Uniquify.it.Modules
+﻿using Uniquify.it.ViewModels;
+
+namespace Uniquify.it.Modules
 {
     using Nancy;
-    using Uniquify.it.ViewModels;
 
     public class BaseModule : NancyModule
     {
         public BaseModule()
         {
-            Get["/"] = _ =>
-                Negotiate
-                .WithModel(new SampleViewModel { Body = "Sample Body", Title = "The Title" })
-                .WithView("Sample");
+            Get["/"] = _ => View["Index", new IndexViewModel()];
+
+            //Get["/Sample"] =
+            //    _ =>
+            //        Negotiate.WithView("Sample")
+            //            .WithModel(new SampleViewModel {Body = "Sample Body", Title = "The Title"});
         }
     }
 }
