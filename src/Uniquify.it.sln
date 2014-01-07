@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uniquify.it.Tests", "Uniqui
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uniquify.js", "Uniquify.js\Uniquify.js.csproj", "{FFF2BEB1-43EC-4108-A3FC-3C5FF3F46C42}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uniquify.js.Tests", "Uniquify.js.Tests\Uniquify.js.Tests.csproj", "{3C2B3727-B375-4CA5-94EF-A28B30555FC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{FFF2BEB1-43EC-4108-A3FC-3C5FF3F46C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFF2BEB1-43EC-4108-A3FC-3C5FF3F46C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFF2BEB1-43EC-4108-A3FC-3C5FF3F46C42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C2B3727-B375-4CA5-94EF-A28B30555FC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C2B3727-B375-4CA5-94EF-A28B30555FC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C2B3727-B375-4CA5-94EF-A28B30555FC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C2B3727-B375-4CA5-94EF-A28B30555FC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
