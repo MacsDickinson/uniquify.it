@@ -3,6 +3,7 @@ using Uniquify.it.ViewModels;
 
 namespace Uniquify.it.Tests
 {
+    using System.Linq;
     using FluentAssertions;
     using Nancy;
     using Nancy.Testing;
@@ -24,6 +25,16 @@ namespace Uniquify.it.Tests
             var response = _browser.Get("/");
             // Assert
             response.StatusCode.ShouldBeEquivalentTo(HttpStatusCode.OK);
+        }
+
+        [Fact]
+        public void Get_root_should_return_correct_title()
+        {
+            // Act
+            var response = _browser.Get("/");
+            // Assert
+            response.Body["title"].ShouldExistOnce();
+            response.Body["title"].AllShouldContain("uniquify.it");
         }
 
         [Fact]

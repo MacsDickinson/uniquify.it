@@ -6,9 +6,12 @@
 describe("Uniquify.js", function () {
     var uniquifyer = new SecureClass();
 
-    it("should return hashed password", function () {
-        var result = uniquifyer.generateSecurePass('google.com', 'supersecure', '20', true);
-
-        expect(result).toBe('cnS.:rN0_xhQ_MWt2W6D');
+    it("should return a password with the supplied length", function () {
+        for (var expected = 1; expected < 64; expected++) {
+            // Act
+            var result = uniquifyer.generateSecurePass('google.com', 'supersecure', expected, true);
+            // Assert
+            expect(result.length).toBe(expected);
+        }
     });
 });
