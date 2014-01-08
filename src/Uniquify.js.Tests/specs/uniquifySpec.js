@@ -14,4 +14,30 @@ describe("Uniquify.js", function () {
             expect(result.length).toBe(expected);
         }
     });
+
+    it("should return a password with special chars when specified", function () {
+        // Act
+        var result = uniquifyer.generateSecurePass('google.com', 'supersecure', 20, true);
+
+        // Assert
+        expect(containsSpecialChar(result)).toBeTruthy();
+    });
+
+    it("should return a password without special chars when specified", function () {
+        // Act
+        var result = uniquifyer.generateSecurePass('google.com', 'supersecure', 20, false);
+
+        // Assert
+        expect(containsSpecialChar(result)).toBeFalsy();
+    });
+
+    function containsSpecialChar(result) {
+        var special = ['!', '£', '$', '%', '&', '*', '@', '~', '#', '.', '<', '>', '?', ';', ':', '_', '+'];
+        for (var s in special) {
+            if (result.indexOf(special[s]) > -1) {
+                return true;
+            }
+        }
+        return false;
+    }
 });
