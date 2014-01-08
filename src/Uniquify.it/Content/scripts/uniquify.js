@@ -1,7 +1,6 @@
 ﻿SecureClass = Class.extend({
     generateSecurePass: function(domain, key, length, includeSpecial) {
         var hash = hex_hmac_sha256(key, domain);
-        $('#hash').text(hash);
         var chars = [];
         var special = [];
         if (includeSpecial) {
@@ -34,8 +33,6 @@
             }
             if (!found) {
                 securepass = securepass.replaceAt(bytes[key.length % bytes.length] % length, special[domain.length % special.length]);
-
-                $('#something').text(special[domain.length % special.length] + ' added to position ' + bytes[key.length % bytes.length] % length);
             }
         }
 

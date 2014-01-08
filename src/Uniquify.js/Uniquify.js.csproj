@@ -47,6 +47,14 @@
     <Content Include="src\uniquify.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)src\macsen.core.js" "$(SolutionDir)\Uniquify.js.Tests\sources\macsen.core.js" /Y
+xcopy "$(ProjectDir)src\macsen.core.js" "$(SolutionDir)\Uniquify.it\Content\scripts\macsen.core.js" /Y
+xcopy "$(ProjectDir)src\sha256.js" "$(SolutionDir)\Uniquify.js.Tests\sources\sha256.js" /Y
+xcopy "$(ProjectDir)src\sha256.js" "$(SolutionDir)\Uniquify.it\Content\scripts\sha256.js" /Y
+xcopy "$(ProjectDir)src\uniquify.js" "$(SolutionDir)\Uniquify.js.Tests\sources\uniquify.js" /Y
+xcopy "$(ProjectDir)src\uniquify.js" "$(SolutionDir)\Uniquify.it\Content\scripts\uniquify.js" /Y</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

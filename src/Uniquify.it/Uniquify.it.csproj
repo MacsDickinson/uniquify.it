@@ -68,7 +68,7 @@
     <Content Include="Content\scripts\jquery-ui-1.10.3.min.js" />
     <Content Include="Content\scripts\macsen.core.js" />
     <Content Include="Content\scripts\modernizr-2.5.3.js" />
-    <Content Include="Content\scripts\securepass.js" />
+    <Content Include="Content\scripts\uniquify.js" />
     <Content Include="Content\scripts\sha256.js" />
     <Content Include="Content\site.css" />
     <Content Include="packages.config" />

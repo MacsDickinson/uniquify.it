@@ -42,14 +42,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dependencies\phantomjs.exe" />
-    <Content Include="dependencies\sha256.js" />
+    <Content Include="sources\sha256.js" />
     <Content Include="jasmine-samples\Player.js" />
     <Content Include="jasmine-samples\PlayerSpec.js" />
     <Content Include="jasmine-samples\Song.js" />
     <Content Include="jasmine-samples\SpecHelper.js" />
     <Content Include="dependencies\jasmine.js" />
-    <Content Include="dependencies\macsen.core.js" />
+    <Content Include="sources\macsen.core.js" />
     <Content Include="sources\uniquify.js" />
     <Content Include="specs\uniquifySpec.js" />
   </ItemGroup>
