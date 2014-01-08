@@ -1,9 +1,9 @@
 ﻿///<reference path="~/dependencies/jasmine.js"/>
-///<reference path="~/dependencies/macsen.core.js"/>
-///<reference path="~/dependencies/sha256.js"/>
+///<reference path="~/sources/macsen.core.js"/>
+///<reference path="~/sources/sha256.js"/>
 ///<reference path="~/sources/uniquify.js"/>
 
-describe("Calculator", function () {
+describe("Uniquify.js", function () {
     var uniquifyer = new SecureClass();
 
     it("should return hashed password", function () {
