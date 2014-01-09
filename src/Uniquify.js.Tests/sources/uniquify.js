@@ -1,4 +1,4 @@
-﻿SecureClass = Class.extend({
+﻿Uniquify = Class.extend({
     generateSecurePass: function(domain, key, length, includeSpecial) {
         var hash = hex_hmac_sha256(key, domain);
         var chars = [];

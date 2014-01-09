@@ -4,7 +4,7 @@
 ///<reference path="~/sources/uniquify.js"/>
 
 describe("Uniquify.js", function () {
-    var uniquifyer = new SecureClass();
+    var uniquifyer = new Uniquify();
 
     it("should return expected password", function() {
         // Arrange
