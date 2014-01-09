@@ -64,18 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\escheresque.png" />
-    <Content Include="Content\scripts\jquery-ui-1.10.3.js" />
-    <Content Include="Content\scripts\jquery-ui-1.10.3.min.js" />
     <Content Include="Content\scripts\macsen.core.js" />
     <Content Include="Content\scripts\modernizr-2.5.3.js" />
     <Content Include="Content\scripts\uniquify.js" />
     <Content Include="Content\scripts\sha256.js" />
     <Content Include="Content\site.css" />
     <Content Include="packages.config" />
-    <None Include="Content\scripts\jquery-2.0.3.intellisense.js" />
-    <Content Include="Content\scripts\jquery-2.0.3.js" />
-    <Content Include="Content\scripts\jquery-2.0.3.min.js" />
-    <Content Include="Content\scripts\jquery-2.0.3.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
