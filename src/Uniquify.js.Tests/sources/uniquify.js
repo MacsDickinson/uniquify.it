@@ -10,6 +10,7 @@
         var chars = [];
         var special = [];
         if (includeSpecial) {
+
             special = ['!', '£', '$', '%', '&', '*', '@', '~', '#', '.', '<', '>', '?', ';', ':', '_', '+'];
             chars = chars.concat(special);
         }

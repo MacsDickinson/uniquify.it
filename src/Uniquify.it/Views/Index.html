@@ -35,15 +35,11 @@
                     },
                     length: "Please select a password length"
                 },
-                submitHandler: function () {
-                    
-                    $('#securepass-result').text('');
-                    $('.answer-container').css('opacity', 0);
-                    $('.answer-container').css('height', 0);
-                    var domain = $('#domain').val();
-                    var key = $('#key').val();
-                    var length = $("#length-slider").slider("value");
-                    var special = $("#special").is(':checked');
+                submitHandler: function (form) {
+                    var domain = form.elements['domain'].value;
+                    var key = form.elements['key'].value;
+                    var length = parseInt(form.elements['length-value'].value);
+                    var special = form.elements['special'].checked;
                     $('#securepass-result').text(securePass.generateSecurePass(domain, key, length, special));
                     $('.answer-container').css('opacity', 1);
                     $('.answer-container').css('height', 'auto');
@@ -57,18 +53,23 @@
                 value: 8,
                 slide: function (event, ui) {
                     $("#length").text(ui.value);
+                    $('#length-value').val(ui.value);
+                    if ($('#securepass-result').text().length > 0) {
+                        $('#getPass').click();
+                    }
                 }
             });
             $("#length").text($("#length-slider").slider("value"));
-            $("#length").change(function () {
-                if (7 < parseInt(this.value) & parseInt(this.value) < 25) {
-                    $("#length-slider").slider("value", this.value);
-                } else if (8 > parseInt(this.value)) {
-                    this.value = 8;
-                } else if (parseInt(this.value) > 24) {
-                    this.value = 24;
-                }
-            });
+            $('#length-value').val($("#length-slider").slider("value"));
+            //$("#length").change(function () {
+            //    if (7 < parseInt(this.value) & parseInt(this.value) < 25) {
+            //        $("#length-slider").slider("value", this.value);
+            //    } else if (8 > parseInt(this.value)) {
+            //        this.value = 8;
+            //    } else if (parseInt(this.value) > 24) {
+            //        this.value = 24;
+            //    }
+            //});
         });
     </script>
 </head>
@@ -92,6 +93,7 @@
                 <label for="length">Password Length:</label>
                 <div id="length-slider" class="fm-slider"></div>
                 <span id="length" class="fm-slider-label"></span>
+                <input type="hidden" id="length-value"/>
             </div>
             <div class="fm-q">
                 <label for="special">Special Characters:</label>
