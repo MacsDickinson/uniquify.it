@@ -7,91 +7,96 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet" type="text/css">
     <link href="../Content/site.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-    <script type="text/javascript" src="../Content/scripts/modernizr-2.5.3.js"></script>
+    <script type="text/javascript" src="http://modernizr.com/downloads/modernizr-latest.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
     <script type="text/javascript" src="../Content/scripts/macsen.core.js"></script>
     <script type="text/javascript" src="../Content/scripts/sha256.js"></script>
     <script type="text/javascript" src="../Content/scripts/uniquify.js"></script>
     <script type="text/javascript">
         $(function () {
-            $("#password-slider").slider({
+            var securePass = new SecureClass();
+
+            $('#generateForm').validate({
+                rules: {
+                    domain: "required",
+                    key: {
+                        required: true,
+                        minlength: 8
+                    },
+                    length: "required"
+                },
+                messages: {
+                    domain: "Please enter the domain name",
+                    key: {
+                        required: "Please enter a key",
+                        minlength: "The key must be at least 8 characters"
+                    },
+                    length: "Please select a password length"
+                },
+                submitHandler: function () {
+                    
+                    $('#securepass-result').text('');
+                    $('.answer-container').css('opacity', 0);
+                    $('.answer-container').css('height', 0);
+                    var domain = $('#domain').val();
+                    var key = $('#key').val();
+                    var length = $("#length-slider").slider("value");
+                    var special = $("#special").is(':checked');
+                    $('#securepass-result').text(securePass.generateSecurePass(domain, key, length, special));
+                    $('.answer-container').css('opacity', 1);
+                    $('.answer-container').css('height', 'auto');
+                }
+            });
+
+            $("#length-slider").slider({
                 range: "max",
                 min: 8,
                 max: 24,
                 value: 8,
                 slide: function (event, ui) {
-                    $("#PasswordLength").text(ui.value);
+                    $("#length").text(ui.value);
                 }
             });
-            $("#PasswordLength").text($("#password-slider").slider("value"));
-            $("#PasswordLength").change(function () {
+            $("#length").text($("#length-slider").slider("value"));
+            $("#length").change(function () {
                 if (7 < parseInt(this.value) & parseInt(this.value) < 25) {
-                    $("#password-slider").slider("value", this.value);
+                    $("#length-slider").slider("value", this.value);
                 } else if (8 > parseInt(this.value)) {
                     this.value = 8;
                 } else if (parseInt(this.value) > 24) {
                     this.value = 24;
                 }
             });
-            var securePass = new SecureClass();
-            $('#getPass').click(function (e) {
-                e.preventDefault();
-                generatePass();
-            });
-            var generatePass = function () {
-                $('#securepass-result').text('');
-                $('.answer-container').css('opacity', 0);
-                $('.answer-container').css('height', 0);
-                $('.field-validation-error').hide();
-                var domain = $('#ServiceName').val();
-                var key = $('#SecretWord').val();
-                var length = $("#password-slider").slider("value");
-                var special = $("#IncluseSpecial").is(':checked');
-                if (domain.length === 0) {
-                    $('.field-validation-error').text('Please enter a domain');
-                    $('.field-validation-error').show();
-                    return;
-                }
-                if (key.length > 7) {
-                    $('#securepass-result').text(securePass.generateSecurePass(domain, key, length, special));
-                } else {
-                    $('.field-validation-error').text('Secret word needs to be at least 8 characters');
-                    $('.field-validation-error').show();
-                    return;
-                }
-                $('.answer-container').css('opacity', 1);
-                $('.answer-container').css('height', 'auto');
-            };
         });
     </script>
 </head>
 <body>
-    <a href="https://github.com/MacsDickinson/uniquify.it"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <!--<a href="https://github.com/MacsDickinson/uniquify.it"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>-->
     <header>
         <h1>Uniquify<span>.it</span></h1>
     </header>
     <div class="form-container">
-        <form>
+        <form id="generateForm">
             <h3>Generate Your Secure Password:</h3>
             <div class="fm-q">
-                <label for="ServiceName">Domain Name:</label>
-                <input id="ServiceName" name="ServiceName" placeholder="eg. google.com" type="text" value="">
+                <label for="domain">Domain Name:</label>
+                <input id="domain" name="domain" placeholder="eg. google.com" type="text" value="">
             </div>
             <div class="fm-q">
-                <label for="SecretWord">Secret Word:</label>
-                <input id="SecretWord" name="uniquify.pass" type="password" value="">
+                <label for="key">Secret Word:</label>
+                <input id="key" name="key" type="password" value="">
             </div>
             <div class="fm-q">
-                <label for="PasswordLength">Password Length:</label>
-                <div id="password-slider" class="fm-slider"></div>
-                <span id="PasswordLength" class="fm-slider-label" />
+                <label for="length">Password Length:</label>
+                <div id="length-slider" class="fm-slider"></div>
+                <span id="length" class="fm-slider-label"></span>
             </div>
             <div class="fm-q">
-                <label for="IncluseSpecial">Special Characters:</label>
-                <input id="IncluseSpecial" name="IncluseSpecial" type="checkbox" checked="checked">
+                <label for="special">Special Characters:</label>
+                <input id="special" name="special" type="checkbox" checked="checked">
             </div>
-            <span class="field-validation-error"></span>
             <div class="fm-actons">
                 <input type="submit" id="getPass" value="Get Secure Password" />
             </div>

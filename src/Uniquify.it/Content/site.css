@@ -135,6 +135,12 @@ input[type=submit] {
     text-align: right;
     margin-right: 3px;
 }
+.fm-q label.error {
+    width: 69%;
+    color: red;
+    margin-left: 31%;
+    text-align: left;
+}
 .fm-q input[type=text], .fm-q input[type=password] {
     width: 65%;
     display: inline-block;
