@@ -1,10 +1,15 @@
 ﻿Uniquify = Class.extend({
-    generateSecurePass: function(domain, key, length, includeSpecial) {
+    generateSecurePass: function (domain, key, length, includeSpecial, iterations) {
+        if (!iterations) {
+            iterations = 1;
+        }
         var hash = hex_hmac_sha256(key, domain);
+        for (var l = 1; l < iterations; l++) {
+            hash = hex_hmac_sha256(hash, domain);
+        }
         var chars = [];
         var special = [];
         if (includeSpecial) {
-
             special = ['!', '£', '$', '%', '&', '*', '@', '~', '#', '.', '<', '>', '?', ';', ':', '_', '+'];
             chars = chars.concat(special);
         }

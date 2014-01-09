@@ -42,6 +42,22 @@ describe("Uniquify.js", function () {
         expect(containsSpecialChar(result)).toBeFalsy();
     });
 
+    it("should return 1 iteration if no iterations are supplied", function() {
+        // Act
+        var oneiteration = uniquifyer.generateSecurePass('google.com', 'supersecure', 20, false, 1);
+        var noiterations = uniquifyer.generateSecurePass('google.com', 'supersecure', 20, false, 1);
+        // Assert
+        expect(noiterations).toBe(oneiteration);
+    });
+
+    it("should return different password for two iterations", function () {
+        // Act
+        var result = uniquifyer.generateSecurePass('google.com', 'supersecure', 20, false, 2);
+        var oneiterations = uniquifyer.generateSecurePass('google.com', 'supersecure', 20, false, 1);
+        // Assert
+        expect(result).toNotBe(oneiterations);
+    });
+
     function containsSpecialChar(result) {
         var special = ['!', '£', '$', '%', '&', '*', '@', '~', '#', '.', '<', '>', '?', ';', ':', '_', '+'];
         for (var s in special) {
