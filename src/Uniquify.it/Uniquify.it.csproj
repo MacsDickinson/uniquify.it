@@ -65,7 +65,6 @@
   <ItemGroup>
     <Content Include="Content\escheresque.png" />
     <Content Include="Content\scripts\macsen.core.js" />
-    <Content Include="Content\scripts\modernizr-2.5.3.js" />
     <Content Include="Content\scripts\uniquify.js" />
     <Content Include="Content\scripts\sha256.js" />
     <Content Include="Content\site.css" />

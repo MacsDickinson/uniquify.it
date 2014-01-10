@@ -190,7 +190,11 @@ footer h2 {
     border: 1px solid #f00;
     background-color: #fee;
 }
-
+#securepass-result.copied {
+    margin-top: 100px;
+    opacity: 0;
+    transition: all 0.5s ease-out;
+}
 @media only screen and (max-width: 330px) {
     .fm-q label {
         font-size: 0.76em
