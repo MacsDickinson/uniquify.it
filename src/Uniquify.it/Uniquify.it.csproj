@@ -69,6 +69,7 @@
     <Content Include="Content\scripts\sha256.js" />
     <Content Include="Content\site.css" />
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\WebDeploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -80,7 +81,9 @@
     <Content Include="Views\Index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\BaseModule.cs" />
