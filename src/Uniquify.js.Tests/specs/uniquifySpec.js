@@ -12,7 +12,7 @@ describe("Uniquify.js", function () {
         var key = 'OXts6Qm?';
         var expected = 'tP$gyy_*';
         // Act
-        var result = uniquifyer.generateSecurePass(domain, key, 8, true);
+        var result = uniquifyer.generatePassword(domain, key, 8, true);
         // Assert
         expect(result).toBe(expected);
     });
@@ -20,7 +20,7 @@ describe("Uniquify.js", function () {
     it("should return a password with the supplied length", function () {
         for (var i = 1; i < 64; i++) {
             // Act
-            var result = uniquifyer.generateSecurePass('google.com', 'supersecure', i, true);
+            var result = uniquifyer.generatePassword('google.com', 'supersecure', i, true);
             // Assert
             expect(result.length).toBe(i);
         }
@@ -28,7 +28,7 @@ describe("Uniquify.js", function () {
 
     it("should return a password with special chars when specified", function () {
         // Act
-        var result = uniquifyer.generateSecurePass('google.com', 'supersecure', 20, true);
+        var result = uniquifyer.generatePassword('google.com', 'supersecure', 20, true);
 
         // Assert
         expect(containsSpecialChar(result)).toBeTruthy();
@@ -36,7 +36,7 @@ describe("Uniquify.js", function () {
 
     it("should return a password without special chars when specified", function () {
         // Act
-        var result = uniquifyer.generateSecurePass('google.com', 'supersecure', 20, false);
+        var result = uniquifyer.generatePassword('google.com', 'supersecure', 20, false);
 
         // Assert
         expect(containsSpecialChar(result)).toBeFalsy();
@@ -44,16 +44,16 @@ describe("Uniquify.js", function () {
 
     it("should return 1 iteration if no iterations are supplied", function() {
         // Act
-        var oneiteration = uniquifyer.generateSecurePass('google.com', 'supersecure', 20, false, 1);
-        var noiterations = uniquifyer.generateSecurePass('google.com', 'supersecure', 20, false, 1);
+        var oneiteration = uniquifyer.generatePassword('google.com', 'supersecure', 20, false, 1);
+        var noiterations = uniquifyer.generatePassword('google.com', 'supersecure', 20, false, 1);
         // Assert
         expect(noiterations).toBe(oneiteration);
     });
 
     it("should return different password for two iterations", function () {
         // Act
-        var result = uniquifyer.generateSecurePass('google.com', 'supersecure', 20, false, 2);
-        var oneiterations = uniquifyer.generateSecurePass('google.com', 'supersecure', 20, false, 1);
+        var result = uniquifyer.generatePassword('google.com', 'supersecure', 20, false, 2);
+        var oneiterations = uniquifyer.generatePassword('google.com', 'supersecure', 20, false, 1);
         // Assert
         expect(result).toNotBe(oneiterations);
     });
