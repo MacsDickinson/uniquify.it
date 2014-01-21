@@ -190,7 +190,7 @@ footer h2 {
     border: 1px solid #f00;
     background-color: #fee;
 }
-#securepass-result.copied {
+#result.copied {
     margin-top: 100px;
     opacity: 0;
     transition: all 0.5s ease-out;

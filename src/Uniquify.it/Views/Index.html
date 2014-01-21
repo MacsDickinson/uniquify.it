@@ -11,7 +11,8 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.5/mousetrap.min.js"></script>
+    <!--<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.5/mousetrap.min.js"></script>-->
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/1.2.3/ZeroClipboard.min.js"></script>
     <script type="text/javascript" src="../Content/scripts/macsen.core.js"></script>
     <script type="text/javascript" src="../Content/scripts/sha256.js"></script>
     <script type="text/javascript" src="../Content/scripts/uniquify.js"></script>
@@ -41,7 +42,9 @@
                     var key = form.elements['key'].value;
                     var length = parseInt(form.elements['length-value'].value);
                     var special = form.elements['special'].checked;
-                    $('#securepass-result').text(securePass.generatePassword(domain, key, length, special));
+                    var result = securePass.generatePassword(domain, key, length, special);
+                    $('#result').text(result);
+                    $('#copy').attr('data-clipboard-text', result);
                     $('.answer-container').css('opacity', 1);
                     $('.answer-container').css('height', 'auto');
                 }
@@ -55,21 +58,49 @@
                 slide: function (event, ui) {
                     $("#length").text(ui.value);
                     $('#length-value').val(ui.value);
-                    if ($('#securepass-result').text().length > 0) {
+                    if ($('#result').text().length > 0) {
                         $('#getPass').click();
                     }
                 }
             });
             $("#length").text($("#length-slider").slider("value"));
             $('#length-value').val($("#length-slider").slider("value"));
-
-            Mousetrap.bind(['command+c', 'ctrl+c'], function (e) {
+            $('#copy').click(function(e) {
                 e.preventDefault();
-                var copy = $('#securepass-result').clone();
-                copy.id = "";
-                $('#securepass-result').after(copy);
-                //$('#securepass-result').next().addClass('copied');
+
             });
+            var clip = new ZeroClipboard(document.getElementById("copy"), {
+                moviePath: "/Content/ZeroClipboard.swf"
+            });
+            clip.on("load", function (client) {
+                client.on("complete", function (client, args) {
+                    var copy = $('#result').clone();
+                    copy.id = "";
+                    $('#result').after(copy);
+                    $('#result').next().addClass('copied');
+                });
+            });
+            function copyResult() {
+                
+            }
+            function copyIntoClipboard(text) {
+                var flashId = 'flashId-HKxmj5';
+
+                /* Replace this with your clipboard.swf location */
+                var clipboardSWF = 'http://appengine.bravo9.com/copy-into-clipboard/clipboard.swf';
+
+                if (!document.getElementById(flashId)) {
+                    var div = document.createElement('div');
+                    div.id = flashId;
+                    document.body.appendChild(div);
+                }
+                document.getElementById(flashId).innerHTML = '';
+                var content = '<embed src="' +
+                    clipboardSWF +
+                    '" FlashVars="clipboard=' + encodeURIComponent(text) +
+                    '" width="0" height="0" type="application/x-shockwave-flash"></embed>';
+                document.getElementById(flashId).innerHTML = content;
+            }
         });
     </script>
 </head>
@@ -106,10 +137,13 @@
     </div>
     <div class="answer-container">
         <h2>
-            <span id="securepass-result">
+            <span id="result">
                 
-            </span> 
+            </span>
         </h2>
+        <div class="fm-actons">
+            <input type="submit" id="copy" value="Copy" />
+        </div>
     </div>
     <section>
         <h2>What is it?</h2>

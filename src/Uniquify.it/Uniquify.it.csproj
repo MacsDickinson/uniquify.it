@@ -68,6 +68,7 @@
     <Content Include="Content\scripts\uniquify.js" />
     <Content Include="Content\scripts\sha256.js" />
     <Content Include="Content\site.css" />
+    <Content Include="Content\ZeroClipboard.swf" />
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\WebDeploy.pubxml" />
     <None Include="Web.Debug.config">
