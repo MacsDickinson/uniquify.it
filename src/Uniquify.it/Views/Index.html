@@ -26,7 +26,8 @@
                         required: true,
                         minlength: 8
                     },
-                    length: "required"
+                    length: "required",
+                    iterations: "required"
                 },
                 messages: {
                     domain: "Please enter the domain name",
@@ -34,14 +35,16 @@
                         required: "Please enter a key",
                         minlength: "The key must be at least 8 characters"
                     },
-                    length: "Please select a password length"
+                    length: "Please select a password length",
+                    iterations: "Please select a number of iterations"
                 },
                 submitHandler: function (form) {
                     var domain = form.elements['domain'].value;
                     var key = form.elements['key'].value;
                     var length = parseInt(form.elements['length-value'].value);
+                    var iterations = parseInt(form.elements['iterations-value'].value);
                     var special = form.elements['special'].checked;
-                    var result = securePass.generatePassword(domain, key, length, special);
+                    var result = securePass.generatePassword(domain, key, length, special, iterations);
                     $('#result').text(result);
                     $('#copy').attr('data-clipboard-text', result);
                     $('.answer-container').css('opacity', 1);
@@ -57,13 +60,22 @@
                 slide: function (event, ui) {
                     $("#length").text(ui.value);
                     $('#length-value').val(ui.value);
-                    if ($('#result').text().length > 0) {
-                        $('#getPass').click();
-                    }
+                }
+            });
+            $("#iterations-slider").slider({
+                range: "max",
+                min: 1,
+                max: 10000,
+                value: 1,
+                slide: function (event, ui) {
+                    $("#iterations").text(ui.value);
+                    $('#iterations-value').val(ui.value);
                 }
             });
             $("#length").text($("#length-slider").slider("value"));
+            $("#iterations").text($("#iterations-slider").slider("value"));
             $('#length-value').val($("#length-slider").slider("value"));
+            $('#iterations-value').val($("#iterations-slider").slider("value"));
             var clip = new ZeroClipboard($("#copy"), {
                 moviePath: "/Content/ZeroClipboard.swf"
             });
@@ -100,6 +112,12 @@
             <div class="fm-q">
                 <label for="special">Special Characters:</label>
                 <input id="special" name="special" type="checkbox" checked="checked">
+            </div>
+            <div class="fm-q">
+                <label for="iterations">Iterations:</label>
+                <div id="iterations-slider" class="fm-slider"></div>
+                <span id="iterations" class="fm-slider-label"></span>
+                <input type="hidden" id="iterations-value" />
             </div>
             <div class="fm-actons">
                 <input type="submit" id="getPass" value="Get Secure Password" />
