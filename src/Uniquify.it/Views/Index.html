@@ -44,7 +44,8 @@
                     var length = parseInt(form.elements['length-value'].value);
                     var iterations = parseInt(form.elements['iterations-value'].value);
                     var special = form.elements['special'].checked;
-                    var result = securePass.generatePassword(domain, key, length, special, iterations);
+                    var specials = form.elements['specialChars'].value;
+                    var result = securePass.generatePassword(domain, key, length, special, iterations, specials);
                     $('#result').text(result);
                     $('#copy').attr('data-clipboard-text', result);
                     $('.answer-container').css('opacity', 1);
@@ -76,6 +77,9 @@
             $("#iterations").text($("#iterations-slider").slider("value"));
             $('#length-value').val($("#length-slider").slider("value"));
             $('#iterations-value').val($("#iterations-slider").slider("value"));
+            $('#special').click(function() {
+                $("#specialCharsContainer").toggle(this.checked);
+            });
             var clip = new ZeroClipboard($("#copy"), {
                 moviePath: "/Content/ZeroClipboard.swf"
             });
@@ -112,6 +116,10 @@
             <div class="fm-q">
                 <label for="special">Special Characters:</label>
                 <input id="special" name="special" type="checkbox" checked="checked">
+            </div>
+            <div class="fm-q" id="specialCharsContainer">
+                <label for="specialChars">Special Characters:</label>
+                <input id="specialChars" name="specialChars" type="text" value="!£$%&*@~#.<>?;:_+">
             </div>
             <div class="fm-q">
                 <label for="iterations">Iterations:</label>
