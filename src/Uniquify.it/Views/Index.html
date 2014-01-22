@@ -11,7 +11,6 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-    <!--<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.5/mousetrap.min.js"></script>-->
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/1.2.3/ZeroClipboard.min.js"></script>
     <script type="text/javascript" src="../Content/scripts/macsen.core.js"></script>
     <script type="text/javascript" src="../Content/scripts/sha256.js"></script>
@@ -65,42 +64,14 @@
             });
             $("#length").text($("#length-slider").slider("value"));
             $('#length-value').val($("#length-slider").slider("value"));
-            $('#copy').click(function(e) {
-                e.preventDefault();
-
-            });
-            var clip = new ZeroClipboard(document.getElementById("copy"), {
+            var clip = new ZeroClipboard($("#copy"), {
                 moviePath: "/Content/ZeroClipboard.swf"
             });
             clip.on("load", function (client) {
                 client.on("complete", function (client, args) {
-                    var copy = $('#result').clone();
-                    copy.id = "";
-                    $('#result').after(copy);
-                    $('#result').next().addClass('copied');
+                    $(this).val('Copied to clipboard: ' + args.text);
                 });
             });
-            function copyResult() {
-                
-            }
-            function copyIntoClipboard(text) {
-                var flashId = 'flashId-HKxmj5';
-
-                /* Replace this with your clipboard.swf location */
-                var clipboardSWF = 'http://appengine.bravo9.com/copy-into-clipboard/clipboard.swf';
-
-                if (!document.getElementById(flashId)) {
-                    var div = document.createElement('div');
-                    div.id = flashId;
-                    document.body.appendChild(div);
-                }
-                document.getElementById(flashId).innerHTML = '';
-                var content = '<embed src="' +
-                    clipboardSWF +
-                    '" FlashVars="clipboard=' + encodeURIComponent(text) +
-                    '" width="0" height="0" type="application/x-shockwave-flash"></embed>';
-                document.getElementById(flashId).innerHTML = content;
-            }
         });
     </script>
 </head>
@@ -137,12 +108,10 @@
     </div>
     <div class="answer-container">
         <h2>
-            <span id="result">
-                
-            </span>
+            <span id="result" class="result"></span>
         </h2>
         <div class="fm-actons">
-            <input type="submit" id="copy" value="Copy" />
+            <input type="submit" id="copy" value="Copy to clipboard" />
         </div>
     </div>
     <section>

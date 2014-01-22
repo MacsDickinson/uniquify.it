@@ -190,10 +190,16 @@ footer h2 {
     border: 1px solid #f00;
     background-color: #fee;
 }
-#result.copied {
+.answer-container h2 {
+    position: relative;
+}
+.result {
+    position: relative;
+}
+.result.copied {
     margin-top: 100px;
     opacity: 0;
-    transition: all 0.5s ease-out;
+    transition: all 2s ease-out;
 }
 @media only screen and (max-width: 330px) {
     .fm-q label {
