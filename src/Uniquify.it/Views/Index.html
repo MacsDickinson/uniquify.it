@@ -27,7 +27,11 @@
                         minlength: 8
                     },
                     length: "required",
-                    iterations: "required"
+                    iterations: "required",
+                    specialChars: {
+                        required: true,
+                        minlength: 5
+                    },
                 },
                 messages: {
                     domain: "Please enter the domain name",
@@ -36,7 +40,11 @@
                         minlength: "The key must be at least 8 characters"
                     },
                     length: "Please select a password length",
-                    iterations: "Please select a number of iterations"
+                    iterations: "Please select a number of iterations",
+                    specialChars: {
+                        required: "Please enter at least 5 special characters",
+                        minlength: "Please enter at least 5 special characters"
+                    }
                 },
                 submitHandler: function (form) {
                     var domain = form.elements['domain'].value;
@@ -71,6 +79,7 @@
                 slide: function (event, ui) {
                     $("#iterations").text(ui.value);
                     $('#iterations-value').val(ui.value);
+                    $('#iterations-error').toggle(ui.value < 1000);
                 }
             });
             $("#length").text($("#length-slider").slider("value"));
@@ -125,6 +134,7 @@
                 <label for="iterations">Iterations:</label>
                 <div id="iterations-slider" class="fm-slider"></div>
                 <span id="iterations" class="fm-slider-label"></span>
+                <label for="iterations" class="warning" id="iterations-error">We recommend you use a higher number of iterations</label>
                 <input type="hidden" id="iterations-value" />
             </div>
             <div class="fm-actons">

@@ -135,7 +135,7 @@ input[type=submit] {
     text-align: right;
     margin-right: 3px;
 }
-.fm-q label.error {
+.fm-q label.error, .fm-q label.warning {
     width: 69%;
     color: red;
     margin-left: 31%;
