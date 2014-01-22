@@ -67,6 +67,16 @@ describe("Uniquify.js", function () {
         expect(containsSpecialChar(result)).toBeTruthy();
     });
 
+    it("should return same password if default special characters are specified", function () {
+        // Arrange
+        var special = ['!', '£', '$', '%', '&', '*', '@', '~', '#', '.', '<', '>', '?', ';', ':', '_', '+'];
+        // Act
+        var result = uniquifyer.generatePassword('google.com', 'supersecure', 20, true, 2, special);
+        var defaultresult = uniquifyer.generatePassword('google.com', 'supersecure', 20, true, 2);
+        // Assert
+        expect(defaultresult).toBe(result);
+    });
+
     function containsSpecialChar(result, special) {
         if (!special) special = ['!', '£', '$', '%', '&', '*', '@', '~', '#', '.', '<', '>', '?', ';', ':', '_', '+'];
         for (var s in special) {
