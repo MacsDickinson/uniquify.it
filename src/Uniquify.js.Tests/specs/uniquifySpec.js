@@ -45,7 +45,7 @@ describe("Uniquify.js", function () {
     it("should return 1 iteration if no iterations are supplied", function() {
         // Act
         var oneiteration = uniquifyer.generatePassword('google.com', 'supersecure', 20, false, 1);
-        var noiterations = uniquifyer.generatePassword('google.com', 'supersecure', 20, false, 1);
+        var noiterations = uniquifyer.generatePassword('google.com', 'supersecure', 20, false);
         // Assert
         expect(noiterations).toBe(oneiteration);
     });
