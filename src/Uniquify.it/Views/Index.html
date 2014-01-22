@@ -44,7 +44,7 @@
                     var length = parseInt(form.elements['length-value'].value);
                     var iterations = parseInt(form.elements['iterations-value'].value);
                     var special = form.elements['special'].checked;
-                    var specials = form.elements['specialChars'].value;
+                    var specials = form.elements['specialChars'].value.split('');
                     var result = securePass.generatePassword(domain, key, length, special, iterations, specials);
                     $('#result').text(result);
                     $('#copy').attr('data-clipboard-text', result);
