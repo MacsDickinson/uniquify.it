@@ -77,6 +77,24 @@ describe("Uniquify.js", function () {
         expect(defaultresult).toBe(result);
     });
 
+    it("should return different password if more than one key is specified", function () {
+        // Arrange
+        // Act
+        var result = uniquifyer.generatePassword('google.com', ['supersecure','moresecure'], 20, true);
+        var defaultresult = uniquifyer.generatePassword('google.com', 'supersecure', 20, true);
+        // Assert
+        expect(defaultresult).toNotBe(result);
+    });
+
+    it("should return different password if more than one key is specified - 2", function () {
+        // Arrange
+        // Act
+        var result = uniquifyer.generatePassword('google.com', ['supersecure', 'moresecure'], 20, true);
+        var defaultresult = uniquifyer.generatePassword('google.com', 'moresecure', 20, true);
+        // Assert
+        expect(defaultresult).toNotBe(result);
+    });
+
     function containsSpecialChar(result, special) {
         if (!special) special = ['!', '£', '$', '%', '&', '*', '@', '~', '#', '.', '<', '>', '?', ';', ':', '_', '+'];
         for (var s in special) {

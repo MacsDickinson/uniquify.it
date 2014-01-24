@@ -1,13 +1,22 @@
 ﻿(function () {
     this.Uniquify = Class.extend({
-        generatePassword: function(domain, key, length, includeSpecial, iterations, specialChars) {
+        generatePassword: function (domain, keys, length, includeSpecial, iterations, specialChars) {
+            if (typeof keys == "string") {
+                var key = keys;
+                keys = [];
+                keys.push(key);
+            }
             if (!iterations) iterations = 1;
             if (!specialChars) specialChars = ['!', '£', '$', '%', '&', '*', '@', '~', '#', '.', '<', '>', '?', ';', ':', '_', '+'];
-            var password = key;
-            for (var i = 0; i < iterations; i++) {
-                password = this.getHash(domain, password, length, includeSpecial, specialChars);
+            var finalPassword = "";
+            for (var j = 0; j < keys.length; j++) {
+                var password = finalPassword + keys[j];
+                for (var i = 0; i < iterations; i++) {
+                    password = this.getHash(domain, password, length, includeSpecial, specialChars);
+                }
+                finalPassword = password;
             }
-            return password;
+            return finalPassword;
         },
         getHash: function (domain, key, length, includeSpecial, specialChars) {
             var hash = hex_hmac_sha256(key, domain);
