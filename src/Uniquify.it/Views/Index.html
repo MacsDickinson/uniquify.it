@@ -12,6 +12,7 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/1.2.3/ZeroClipboard.min.js"></script>
+    <link rel="stylesheet" href="http://i.icomoon.io/public/temp/ed33f37891/UntitledProject1/style.css">
     <script type="text/javascript" src="../Content/scripts/macsen.core.js"></script>
     <script type="text/javascript" src="../Content/scripts/sha256.js"></script>
     <script type="text/javascript" src="../Content/scripts/uniquify.js"></script>
@@ -60,7 +61,12 @@
                     $('.answer-container').css('height', 'auto');
                 }
             });
-
+            $(".show-key").mouseup(function () {
+                this.previousSibling.type = 'password';
+            });
+            $(".show-key").mousedown(function () {
+                this.previousSibling.type = 'text';
+            });
             $("#length-slider").slider({
                 range: "max",
                 min: 8,
@@ -114,7 +120,13 @@
             </div>
             <div class="fm-q">
                 <label for="key">Key:</label>
-                <input id="key" name="key" type="password" value="">
+                <div class="input-wrapper">
+                    <input id="key" name="key" class="key" type="password" value=""><a class="show-key"><i class="icon-eye"></i></a>
+                </div>
+            </div>
+            <div class="fm-q">
+                <label for="add-key"></label>
+                <a id="add-key"><i class="icon-key2"></i><i class="icon-plus2"></i></a>
             </div>
             <div class="fm-q">
                 <label for="length">Password Length:</label>

@@ -142,11 +142,40 @@ input[type=submit] {
     text-align: left;
 }
 .fm-q input[type=text], .fm-q input[type=password] {
-    width: 65%;
     display: inline-block;
     font-size: 1.1em;
     padding: 4px 0;
 }
+.fm-q input[type=text], .fm-q input[type=password] {
+    width: 65%;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper input {
+    position: absolute;
+    left: 0;
+}
+
+.input-wrapper .show-key {
+    position: absolute;
+    right: 0;
+}
+
+.show-key {
+    padding: 5px;
+    color: lightgray;
+}
+    .show-key:hover {
+        cursor: pointer;
+        color: grey;
+    }
+    .show-key:active {
+        color: blue;
+    }
+
 /* FOOTER
     ------------------------------------------------------*/
 footer {
