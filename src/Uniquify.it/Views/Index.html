@@ -81,7 +81,7 @@
             });
             
             $(document).on('click', '.delete-key', function () {
-                this.parentNode.remove();
+                $(this).parent().remove();
             });
             $("#length-slider").slider({
                 range: "max",
