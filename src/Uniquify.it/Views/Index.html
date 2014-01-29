@@ -13,20 +13,27 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/1.2.3/ZeroClipboard.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
     <script type="text/javascript" src="../Content/scripts/macsen.core.js"></script>
     <script type="text/javascript" src="../Content/scripts/sha256.js"></script>
     <script type="text/javascript" src="../Content/scripts/uniquify.js"></script>
     <script type="text/javascript">
         $(function () {
             var securePass = new Uniquify();
-
+            $('#generateForm').submit(function(e) {
+                e.preventDefault();
+            });
             $('#generateForm').validate({
                 rules: {
                     domain: "required",
-                    key: {
-                        required: true,
-                        minlength: 8
-                    },
+                    key0: { required: true, minlength: 8 },
+                    key1: { minlength: 8 },
+                    key2: { minlength: 8 },
+                    key3: { minlength: 8 },
+                    key4: { minlength: 8 },
+                    key5: { minlength: 8 },
+                    key6: { minlength: 8 },
+                    key7: { minlength: 8 },
                     length: "required",
                     iterations: "required",
                     specialChars: {
@@ -49,23 +56,29 @@
                 },
                 submitHandler: function (form) {
                     var domain = form.elements['domain'].value;
-                    var key = form.elements['key'].value;
+                    var keys = [];
+                    $('.key').each(function () {
+                        var val = $(this).val();
+                        if (val !== '') {
+                            keys.push($(this).val());
+                        }
+                    });
                     var length = parseInt(form.elements['length-value'].value);
                     var iterations = parseInt(form.elements['iterations-value'].value);
                     var special = form.elements['special'].checked;
                     var specials = form.elements['specialChars'].value.split('');
-                    var result = securePass.generatePassword(domain, key, length, special, iterations, specials);
+                    var result = securePass.generatePassword(domain, keys, length, special, iterations, specials);
                     $('#result').text(result);
                     $('#copy').attr('data-clipboard-text', result);
                     $('.answer-container').css('opacity', 1);
                     $('.answer-container').css('height', 'auto');
                 }
             });
-            $(".show-key").mouseup(function () {
-                this.previousSibling.type = 'password';
+            $(document).on('mouseup', '.show-key', function () {
+                this.parentNode.getElementsByTagName('input')[0].type = 'password';
             });
-            $(".show-key").mousedown(function () {
-                this.previousSibling.type = 'text';
+            $(document).on('mousedown', '.show-key', function () {
+                this.parentNode.getElementsByTagName('input')[0].type = 'text';
             });
             $("#length-slider").slider({
                 range: "max",
@@ -103,6 +116,14 @@
                     $(this).val('Copied to clipboard: ' + args.text);
                 });
             });
+            $('#add-key').click(function () {
+                var id = $('.key').length;
+                var source = $("#key-template").html();
+                var template = Handlebars.compile(source);
+                var context = { id: 'key' + id };
+                var html = template(context);
+                $(this).parent().before(html);
+            });
         });
     </script>
 </head>
@@ -119,9 +140,10 @@
                 <input id="domain" name="domain" placeholder="eg. google.com" type="text" value="">
             </div>
             <div class="fm-q">
-                <label for="key">Key:</label>
-                <input id="key" name="key" class="key" type="password" value=""><a class="show-key"><i class="icon-eye"></i></a>
-                <label for="key" class="error" style="display: none;"></label>
+                <label for="key0">Key:</label>
+                <input id="key0" name="key0" class="key" type="password" value="" />
+                <a class="show-key"><i class="icon-eye"></i></a>
+                <label for="key0" class="error" style="display: none;"></label>
             </div>
             <div class="fm-q">
                 <label for="add-key"></label>
@@ -213,5 +235,13 @@
             </p>
         </div>
     </footer>
+    <script id="key-template" type="text/x-handlebars-template">
+        <div class="fm-q">
+            <label for="{{id}}">Key:</label>
+            <input id="{{id}}" name="{{id}}" class="key" type="password" value="" />
+            <a class="show-key"><i class="icon-eye"></i></a>
+            <label for="{{id}}" class="error" style="display: none;"></label>
+        </div>
+    </script>
 </body>
 </html>
