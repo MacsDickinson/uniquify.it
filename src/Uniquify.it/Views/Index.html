@@ -7,12 +7,12 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet" type="text/css">
     <link href="../Content/site.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="http://i.icomoon.io/public/temp/65d50a58d9/UntitledProject1/style.css">
     <script type="text/javascript" src="http://modernizr.com/downloads/modernizr-latest.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/1.2.3/ZeroClipboard.min.js"></script>
-    <link rel="stylesheet" href="http://i.icomoon.io/public/temp/ed33f37891/UntitledProject1/style.css">
     <script type="text/javascript" src="../Content/scripts/macsen.core.js"></script>
     <script type="text/javascript" src="../Content/scripts/sha256.js"></script>
     <script type="text/javascript" src="../Content/scripts/uniquify.js"></script>
@@ -120,9 +120,8 @@
             </div>
             <div class="fm-q">
                 <label for="key">Key:</label>
-                <div class="input-wrapper">
-                    <input id="key" name="key" class="key" type="password" value=""><a class="show-key"><i class="icon-eye"></i></a>
-                </div>
+                <input id="key" name="key" class="key" type="password" value=""><a class="show-key"><i class="icon-eye"></i></a>
+                <label for="key" class="error" style="display: none;"></label>
             </div>
             <div class="fm-q">
                 <label for="add-key"></label>
