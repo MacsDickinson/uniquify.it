@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet" type="text/css">
     <link href="../Content/site.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-    <link rel="stylesheet" href="http://i.icomoon.io/public/temp/65d50a58d9/UntitledProject1/style.css">
+    <link rel="stylesheet" href="http://i.icomoon.io/public/temp/87647039a3/UntitledProject1/style.css">
     <script type="text/javascript" src="http://modernizr.com/downloads/modernizr-latest.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
@@ -79,6 +79,10 @@
             });
             $(document).on('mousedown', '.show-key', function () {
                 this.parentNode.getElementsByTagName('input')[0].type = 'text';
+            });
+            
+            $(document).on('click', '.delete-key', function () {
+                this.parentNode.remove();
             });
             $("#length-slider").slider({
                 range: "max",
@@ -242,6 +246,7 @@
             <label for="{{id}}">Key:</label>
             <input id="{{id}}" name="{{id}}" class="key" type="password" value="" />
             <a class="show-key"><i class="icon-eye"></i></a>
+            <a class="delete-key"><i class="icon-trash"></i></a>
             <label for="{{id}}" class="error" style="display: none;"></label>
         </div>
     </script>
