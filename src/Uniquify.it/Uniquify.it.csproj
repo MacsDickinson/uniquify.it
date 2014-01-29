@@ -64,12 +64,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\escheresque.png" />
+    <Content Include="Content\fonts\icomoon.svg" />
     <Content Include="Content\scripts\macsen.core.js" />
     <Content Include="Content\scripts\uniquify.js" />
     <Content Include="Content\scripts\sha256.js" />
     <Content Include="Content\site.css" />
     <Content Include="Content\ZeroClipboard.swf" />
     <Content Include="packages.config" />
+    <Content Include="Content\fonts\icomoon.eot" />
+    <Content Include="Content\fonts\icomoon.ttf" />
+    <Content Include="Content\fonts\icomoon.woff" />
     <None Include="Properties\PublishProfiles\WebDeploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
