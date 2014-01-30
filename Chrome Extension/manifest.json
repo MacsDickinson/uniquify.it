@@ -1,8 +1,8 @@
 {
-	"name" : "SecurePass",
+	"name" : "Uniquify.it",
 	"version" : "0.0.1",
 	"description" : "Generates a password for the site you are currenly on",
-	"homepage_url": "http://www.macsentom.co.uk/SecurePass/",
+	"homepage_url": "http://www.Uniquify.it",
 	"background": { 
 		"scripts": [
 			"scripts/background.js"
@@ -18,7 +18,7 @@
 						"scripts/webfont.js",
 						"scripts/macsen.core.js", 
 						"scripts/sha256.js", 
-						"scripts/securepass.js", 
+						"scripts/uniquify.js", 
 						"scripts/contentscript.js"],
 			"css" : [	"styles/contentscript.css"],
 			"run_at" : "document_idle",
@@ -26,12 +26,12 @@
 		}
 	],
 	"page_action" : {
-		"default_icon": "icons/icon2_19.png",
+		"default_icon": "icons/icon_19.png",
 		"default_title" : "Secure Password Generator"
 	},
 	"icons" : {
-		"16" : "icons/icon2_16.png",
-		"19" : "icons/icon2_19.png",
+		"16" : "icons/icon.png",
+		"19" : "icons/icon_19.png",
 		"38" : "icons/icon_38.png",
 		"48" : "icons/icon_48.png",
 		"128" : "icons/icon_128.png"
