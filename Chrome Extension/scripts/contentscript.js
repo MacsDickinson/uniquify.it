@@ -22,9 +22,8 @@ if ($("input:password").length) {
 		var pwWidth = $(this).parent('.securepass-wrapper:first').width();
 		var pwheight = $(this).parent('.securepass-wrapper:first').height();
 		$('.securepass-btn', $(this).parent('.securepass-wrapper:first')).css({
-			top: 0,
-			bottom: 0,
-			right: 0,
+			top: 5,
+			right: 5,
 			width: pwheight
 		});
 		$('body').append('<div id="securepass-popup'+index+'" class="securepass-popup" >'+

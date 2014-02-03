@@ -19,8 +19,8 @@
 }
 .securepass-wrapper{
 	position: relative;
-	border: 3px rgb(81, 177, 201) solid;
-	overflow: hidden;
+	/*border: 3px rgb(81, 177, 201) solid;
+	overflow: hidden;*/
 }
 .securepass-popup{
 	font-size: 1.4em;
@@ -106,11 +106,12 @@
 } 
 @font-face {
     font-family: 'icomoon';
-    src: url('chrome-extension://__MSG_@@cilkmaiabgaalocpkakabifkhlciglmm/fonts/icomoon.woff') format('woff');
+    src: url('chrome-extension://cilkmaiabgaalocpkakabifkhlciglmm/fonts/icomoon.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 [class^="icon-"], [class*=" icon-"] {
+    color: rgb(85, 85, 85);
     font-family: 'icomoon';
     speak: none;
     font-style: normal;
@@ -122,6 +123,10 @@
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+[class^="icon-"]:hover, [class*=" icon-"]:hover {
+    color: rgb(81, 177, 201);
+    cursor: pointer;
 }
 .icon-key2:before {
     content: "\e602";

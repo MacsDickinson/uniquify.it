@@ -37,5 +37,6 @@
 		"128" : "icons/icon_128.png"
 	},
 	"manifest_version" : 2,
-    "permissions": ["http://fonts.googleapis.com/*"] 
+    "permissions": ["http://fonts.googleapis.com/*"],
+	"web_accessible_resources": ["fonts/icomoon.woff"]
 }
