@@ -65,6 +65,7 @@ var submitPass = function (domain, key, input) {
 	var result = generatePass(domain, key);
 	if (result) {
 		$('#'+input).val(result);
+		$('#'+input).focus();
 		$("#lean_overlay").click();
 	}
 }
