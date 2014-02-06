@@ -8,38 +8,40 @@ WebFont.load({
 
 if ($("input:password").length) {
 	$("input:password").each(function(index) {
-		if ($(this).attr('id') === undefined) {
-			$(this).attr('id', 'securepass' + index);
+		if(!$(this).hasClass('no-uniquify-overlay')) {
+			if ($(this).attr('id') === undefined) {
+				$(this).attr('id', 'securepass' + index);
+			}
+			var id = $(this).attr('id');
+			
+			$(this).wrap('<div class="securepass-wrapper"></div>');
+			$(this).before('<span class="icon-key2 securepass-btn"></span>');
+			$(this).before('<a class="securepass-click" rel="leanModal" name="securepass-popup'+index+'" href="#securepass-popup'+index+'" />');
+			$(this).parent('.securepass-wrapper:first').css({
+				width: $(this).width()
+			});
+			var pwWidth = $(this).parent('.securepass-wrapper:first').width();
+			var pwheight = $(this).parent('.securepass-wrapper:first').height();
+			$('.securepass-btn', $(this).parent('.securepass-wrapper:first')).css({
+				top: 5,
+				right: 5,
+				width: pwheight
+			});
+			$('body').append('<div id="securepass-popup'+index+'" class="securepass-popup" >'+
+				'<span class="securepass-h3">Generate Your Secure Password:</span>'+
+				'<div class="securepass-q">'+
+					'<label for="ServiceName">Domain Name:</label>'+
+					'<input id="securepass-domain" name="ServiceName" placeholder="eg. google.com" type="text">'+
+				'</div>'+
+				'<div class="securepass-q">'+
+					'<label for="SecretWord">Secret Word:</label>'+
+					'<input id="securepass-secretword" placeholder="Secret Word..." class="securepass-secretword" name="SecretWord" type="text" value="">'+
+					'<span class="securepass-error"></span>'+
+				'</div>'+
+				'<div class="securepass-actons">'+
+					'<input type="submit" class="getSecurePass" for="'+id+'" value="Get Secure Password" />'+
+				'</div></div>');
 		}
-		var id = $(this).attr('id');
-		
-		$(this).wrap('<div class="securepass-wrapper"></div>');
-		$(this).before('<span class="icon-key2 securepass-btn"></span>');
-		$(this).before('<a class="securepass-click" rel="leanModal" name="securepass-popup'+index+'" href="#securepass-popup'+index+'" />');
-		$(this).parent('.securepass-wrapper:first').css({
-			width: $(this).width()
-		});
-		var pwWidth = $(this).parent('.securepass-wrapper:first').width();
-		var pwheight = $(this).parent('.securepass-wrapper:first').height();
-		$('.securepass-btn', $(this).parent('.securepass-wrapper:first')).css({
-			top: 5,
-			right: 5,
-			width: pwheight
-		});
-		$('body').append('<div id="securepass-popup'+index+'" class="securepass-popup" >'+
-			'<span class="securepass-h3">Generate Your Secure Password:</span>'+
-			'<div class="securepass-q">'+
-				'<label for="ServiceName">Domain Name:</label>'+
-				'<input id="securepass-domain" name="ServiceName" placeholder="eg. google.com" type="text">'+
-			'</div>'+
-			'<div class="securepass-q">'+
-				'<label for="SecretWord">Secret Word:</label>'+
-				'<input id="securepass-secretword" placeholder="Secret Word..." class="securepass-secretword" name="SecretWord" type="text" value="">'+
-				'<span class="securepass-error"></span>'+
-			'</div>'+
-			'<div class="securepass-actons">'+
-				'<input type="submit" class="getSecurePass" for="'+id+'" value="Get Secure Password" />'+
-			'</div></div>');
 	});
 	
 	$("a[rel*=leanModal]").leanModal();
