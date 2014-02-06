@@ -53,7 +53,7 @@ $('.securepass-btn').click(function(event) {
 	clickedPassID = $('.securepass-click', $(this).parents('.securepass-wrapper:first')).attr('name');
 	$('.securepass-click', $(this).parents('.securepass-wrapper:first')).click();
 });
-var securePass = new SecureClass();
+var uniquify = new Uniquify();
 $('.getSecurePass').click(function () {
 	var pass = $(this).attr('for');
 	var secretword = $('.securepass-secretword', $(this).parents('.securepass-popup:first')).val();
@@ -69,7 +69,7 @@ var submitPass = function (domain, key, input) {
 var generatePass = function (domain, key) {
 	$('.securepass-error').hide();
 	if (key.length > 7) {
-		var result = securePass.generateSecurePass(domain, key, 8, 1);
+		var result = uniquify.generatePassword(domain, key, 8, 1);
 		return result;
 	} else {
 		$('.securepass-error').text('Secret word needs to be at least 8 characters');
