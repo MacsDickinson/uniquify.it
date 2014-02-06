@@ -34,8 +34,8 @@ if ($("input:password").length) {
 					'<input id="uniquify-domain" name="ServiceName" placeholder="eg. google.com" type="text">'+
 				'</div>'+
 				'<div class="uniquify-q">'+
-					'<label for="SecretWord">Secret Word:</label>'+
-					'<input id="uniquify-secretword" placeholder="Secret Word..." class="uniquify-secretword" name="SecretWord" type="text" value="">'+
+					'<label for="Key">Key:</label>'+
+					'<input id="uniquify-key" placeholder="Secret Word..." class="uniquify-key" name="SecretWord" type="text" value="">'+
 					'<span class="uniquify-error"></span>'+
 				'</div>'+
 				'<div class="uniquify-actons">'+
@@ -51,14 +51,14 @@ if ($("input:password").length) {
 $('#uniquify-domain').val(document.domain);
 $('.uniquify-btn').click(function(event) {
 	event.preventDefault();
-	$('.uniquify-secretword', $(this).parents('.uniquify-wrapper:first')).val("");
+	$('.uniquify-key', $(this).parents('.uniquify-wrapper:first')).val("");
 	clickedPassID = $('.uniquify-click', $(this).parents('.uniquify-wrapper:first')).attr('name');
 	$('.uniquify-click', $(this).parents('.uniquify-wrapper:first')).click();
 });
 var uniquify = new Uniquify();
 $('.getuniquify').click(function () {
 	var pass = $(this).attr('for');
-	var secretword = $('.uniquify-secretword', $(this).parents('.uniquify-popup:first')).val();
+	var secretword = $('.uniquify-key', $(this).parents('.uniquify-popup:first')).val();
 	submitPass(document.domain, secretword, pass);
 });
 var submitPass = function (domain, key, input) {
