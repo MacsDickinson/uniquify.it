@@ -30,11 +30,16 @@ if ($("input:password").length) {
 				'<span class="uniquify-h3">Generate Your Secure Password:</span>'+
 				'<div class="uniquify-q">'+
 					'<label for="ServiceName">Domain Name:</label>'+
-					'<input id="uniquify-domain" name="ServiceName" placeholder="eg. google.com" type="text">'+
+					'<input id="uniquify-domain" name="domain" class="uniquify-domain" placeholder="eg. google.com" type="text">'+
 				'</div>'+
 				'<div class="uniquify-q">'+
 					'<label for="Key">Key:</label>'+
 					'<input id="uniquify-key" placeholder="Key" class="uniquify-key" name="key" type="text" value="">'+
+					'<span class="uniquify-error"></span>'+
+				'</div>'+
+				'<div class="uniquify-q">'+
+					'<label for="length">length:</label>'+
+					'<input id="uniquify-length" placeholder="Length" class="uniquify-length" name="length" type="number" value="8">'+
 					'<span class="uniquify-error"></span>'+
 				'</div>'+
 				'<div class="uniquify-actons">'+
@@ -56,22 +61,24 @@ $('.uniquify-btn').click(function(event) {
 });
 var uniquify = new Uniquify();
 $('.getuniquify').click(function () {
-	var pass = $(this).attr('for');
-	var secretword = $('.uniquify-key', $(this).parents('.uniquify-popup:first')).val();
-	submitPass(document.domain, secretword, pass);
+	var input = $(this).attr('for');
+	var domain = $('.uniquify-domain', $(this).parents('.uniquify-popup:first')).val();
+	var key = $('.uniquify-key', $(this).parents('.uniquify-popup:first')).val();
+	var length = $('.uniquify-length', $(this).parents('.uniquify-popup:first')).val();
+	submitPass(domain, key, length, input);
 });
-var submitPass = function (domain, key, input) {
-	var result = generatePass(domain, key);
+var submitPass = function (domain, key, length, input) {
+	var result = generatePass(domain, key, length);
 	if (result) {
 		$('#'+input).val(result);
 		$('#'+input).focus();
 		$("#lean_overlay").click();
 	}
 }
-var generatePass = function (domain, key) {
+var generatePass = function (domain, key, length) {
 	$('.uniquify-error').hide();
 	if (key.length > 7) {
-		var result = uniquify.generatePassword(domain, key, 8, true, 1);
+		var result = uniquify.generatePassword(domain, key, length, true, 1);
 		return result;
 	} else {
 		$('.uniquify-error').text('Secret word needs to be at least 8 characters');
