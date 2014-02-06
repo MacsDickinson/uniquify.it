@@ -10,36 +10,36 @@ if ($("input:password").length) {
 	$("input:password").each(function(index) {
 		if(!$(this).hasClass('no-uniquify-overlay')) {
 			if ($(this).attr('id') === undefined) {
-				$(this).attr('id', 'securepass' + index);
+				$(this).attr('id', 'uniquify' + index);
 			}
 			var id = $(this).attr('id');
 			
-			$(this).wrap('<div class="securepass-wrapper"></div>');
-			$(this).before('<span class="icon-key2 securepass-btn"></span>');
-			$(this).before('<a class="securepass-click" rel="leanModal" name="securepass-popup'+index+'" href="#securepass-popup'+index+'" />');
-			$(this).parent('.securepass-wrapper:first').css({
+			$(this).wrap('<div class="uniquify-wrapper"></div>');
+			$(this).before('<span class="icon-key2 uniquify-btn"></span>');
+			$(this).before('<a class="uniquify-click" rel="leanModal" name="uniquify-popup'+index+'" href="#uniquify-popup'+index+'" />');
+			$(this).parent('.uniquify-wrapper:first').css({
 				width: $(this).width()
 			});
-			var pwWidth = $(this).parent('.securepass-wrapper:first').width();
-			var pwheight = $(this).parent('.securepass-wrapper:first').height();
-			$('.securepass-btn', $(this).parent('.securepass-wrapper:first')).css({
+			var pwWidth = $(this).parent('.uniquify-wrapper:first').width();
+			var pwheight = $(this).parent('.uniquify-wrapper:first').height();
+			$('.uniquify-btn', $(this).parent('.uniquify-wrapper:first')).css({
 				top: 5,
 				right: 5,
 				width: pwheight
 			});
-			$('body').append('<div id="securepass-popup'+index+'" class="securepass-popup" >'+
-				'<span class="securepass-h3">Generate Your Secure Password:</span>'+
-				'<div class="securepass-q">'+
+			$('body').append('<div id="uniquify-popup'+index+'" class="uniquify-popup" >'+
+				'<span class="uniquify-h3">Generate Your Secure Password:</span>'+
+				'<div class="uniquify-q">'+
 					'<label for="ServiceName">Domain Name:</label>'+
-					'<input id="securepass-domain" name="ServiceName" placeholder="eg. google.com" type="text">'+
+					'<input id="uniquify-domain" name="ServiceName" placeholder="eg. google.com" type="text">'+
 				'</div>'+
-				'<div class="securepass-q">'+
+				'<div class="uniquify-q">'+
 					'<label for="SecretWord">Secret Word:</label>'+
-					'<input id="securepass-secretword" placeholder="Secret Word..." class="securepass-secretword" name="SecretWord" type="text" value="">'+
-					'<span class="securepass-error"></span>'+
+					'<input id="uniquify-secretword" placeholder="Secret Word..." class="uniquify-secretword" name="SecretWord" type="text" value="">'+
+					'<span class="uniquify-error"></span>'+
 				'</div>'+
-				'<div class="securepass-actons">'+
-					'<input type="submit" class="getSecurePass" for="'+id+'" value="Get Secure Password" />'+
+				'<div class="uniquify-actons">'+
+					'<input type="submit" class="getuniquify" for="'+id+'" value="Get Secure Password" />'+
 				'</div></div>');
 		}
 	});
@@ -48,17 +48,17 @@ if ($("input:password").length) {
 	chrome.extension.sendRequest({}, function(response) {});
 } else {
 }
-$('#securepass-domain').val(document.domain);
-$('.securepass-btn').click(function(event) {
+$('#uniquify-domain').val(document.domain);
+$('.uniquify-btn').click(function(event) {
 	event.preventDefault();
-	$('.securepass-secretword', $(this).parents('.securepass-wrapper:first')).val("");
-	clickedPassID = $('.securepass-click', $(this).parents('.securepass-wrapper:first')).attr('name');
-	$('.securepass-click', $(this).parents('.securepass-wrapper:first')).click();
+	$('.uniquify-secretword', $(this).parents('.uniquify-wrapper:first')).val("");
+	clickedPassID = $('.uniquify-click', $(this).parents('.uniquify-wrapper:first')).attr('name');
+	$('.uniquify-click', $(this).parents('.uniquify-wrapper:first')).click();
 });
 var uniquify = new Uniquify();
-$('.getSecurePass').click(function () {
+$('.getuniquify').click(function () {
 	var pass = $(this).attr('for');
-	var secretword = $('.securepass-secretword', $(this).parents('.securepass-popup:first')).val();
+	var secretword = $('.uniquify-secretword', $(this).parents('.uniquify-popup:first')).val();
 	submitPass(document.domain, secretword, pass);
 });
 var submitPass = function (domain, key, input) {
@@ -69,13 +69,13 @@ var submitPass = function (domain, key, input) {
 	}
 }
 var generatePass = function (domain, key) {
-	$('.securepass-error').hide();
+	$('.uniquify-error').hide();
 	if (key.length > 7) {
 		var result = uniquify.generatePassword(domain, key, 8, 1);
 		return result;
 	} else {
-		$('.securepass-error').text('Secret word needs to be at least 8 characters');
-		$('.securepass-error').show();
+		$('.uniquify-error').text('Secret word needs to be at least 8 characters');
+		$('.uniquify-error').show();
 		return;
 	}
 };
