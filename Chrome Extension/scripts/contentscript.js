@@ -17,15 +17,14 @@ if ($("input:password").length) {
 			$(this).wrap('<div class="uniquify-wrapper"></div>');
 			$(this).before('<span class="icon-key2 uniquify-btn"></span>');
 			$(this).before('<a class="uniquify-click" rel="leanModal" name="uniquify-popup'+index+'" href="#uniquify-popup'+index+'" />');
-			$(this).parent('.uniquify-wrapper:first').css({
-				width: $(this).width()
-			});
-			var pwWidth = $(this).parent('.uniquify-wrapper:first').width();
-			var pwheight = $(this).parent('.uniquify-wrapper:first').height();
+			
+			var paddingRight = parseInt($(this).css('padding-right'), 10);
+			var pwheight = $(this).innerHeight();
+			var pwWidth = $(this).innerWidth();
+
 			$('.uniquify-btn', $(this).parent('.uniquify-wrapper:first')).css({
-				top: 5,
-				right: 5,
-				width: pwheight
+				top: (pwheight - 12) / 2,
+				left: pwWidth - paddingRight - 12
 			});
 			$('body').append('<div id="uniquify-popup'+index+'" class="uniquify-popup" >'+
 				'<span class="uniquify-h3">Generate Your Secure Password:</span>'+
@@ -35,7 +34,7 @@ if ($("input:password").length) {
 				'</div>'+
 				'<div class="uniquify-q">'+
 					'<label for="Key">Key:</label>'+
-					'<input id="uniquify-key" placeholder="Secret Word..." class="uniquify-key" name="SecretWord" type="text" value="">'+
+					'<input id="uniquify-key" placeholder="Key" class="uniquify-key" name="key" type="text" value="">'+
 					'<span class="uniquify-error"></span>'+
 				'</div>'+
 				'<div class="uniquify-actons">'+
@@ -72,7 +71,7 @@ var submitPass = function (domain, key, input) {
 var generatePass = function (domain, key) {
 	$('.uniquify-error').hide();
 	if (key.length > 7) {
-		var result = uniquify.generatePassword(domain, key, 8, 1);
+		var result = uniquify.generatePassword(domain, key, 8, true, 1);
 		return result;
 	} else {
 		$('.uniquify-error').text('Secret word needs to be at least 8 characters');

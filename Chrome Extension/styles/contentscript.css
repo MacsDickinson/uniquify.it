@@ -9,6 +9,7 @@
 	font-weight: bold;
 }
 .uniquify-btn {
+    vertical-align: middle;
 	position: absolute !important;
 	z-index: 100 !important;
 	padding: 0 !important;
