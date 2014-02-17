@@ -23,30 +23,51 @@
 	/*border: 3px rgb(81, 177, 201) solid;
 	overflow: hidden;*/
 }
-.uniquify-popup{
+.uniquify-popup {
 	font-size: 1.4em;
 	background-color: #fff;
 	background-color: rgba(255,255,255,.9);
-	border-top: 4px solid #51b1c9;
+	border-top: 4px solid rgb(81, 177, 201);
 	border-bottom: 2px solid #555;
 	width: 500px;
 	margin: 10px auto;
 	word-wrap: break-word;
 	display: none;
 	font-family: 'Open Sans Condensed', sans-serif !important;
+    -webkit-transition: opacity .5s ease-out;
+    -moz-transition: opacity .5s ease-out;
+    -ms-transition: opacity .5s ease-out;
+    -o-transition: opacity .5s ease-out;
 }
-.uniquify-popup h1 {
-    color: rgb(81, 177, 201) !important;
-    font-size: 3.4em !important;
-    font-weight: 300 !important;
-	text-align: center !important;
+    .uniquify-popup h1 {
+        color: rgb(81, 177, 201) !important;
+        font-size: 3.4em !important;
+        font-weight: 300 !important;
+    	text-align: center !important;
+    }
+    .uniquify-popup h3 {
+        color: rgb(81, 177, 201) !important;
+        font-size: 1.4em !important;
+        font-weight: 300 !important;
+        margin: 10px 0 !important;
+    	margin-left: 15px !important;
+    }
+    .uniquify-popup a {
+        color: rgb(81, 177, 201);
+        text-decoration: none !important;
+    }
+    .uniquify-popup a:hover {
+            color: rgb(62, 135, 153);
+    }
+
+.uniquify-slider {
+    margin: 0 12px;
+    display: inline-block;
+    width: 40%;
+    vertical-align: middle;
 }
-.uniquify-popup h3 {
-    color: rgb(81, 177, 201) !important;
-    font-size: 1.4em !important;
-    font-weight: 300 !important;
-    margin: 10px 0 !important;
-	margin-left: 15px !important;
+.uniquify-slider-label {
+    vertical-align: middle;
 }
 .uniquify-actons {
     margin: 10px auto 0;
@@ -55,7 +76,7 @@
     font-size: 1.1em !important;
     margin: 0 auto !important;
     background-color: #eeeeee !important;
-    border-top: 1px solid rgb(81, 177, 201) !important;
+    border-top: 2px solid rgb(81, 177, 201) !important;
     border-bottom: none !important;
     border-right: none !important;
     border-left: none !important;
@@ -82,18 +103,40 @@
     text-align: right;
     margin-right: 3px;
 }
-.uniquify-q input[type=text] {
-    width: 65%;
+.uniquify-q input[type=text], .uniquify-q input[type=password] {
     display: inline-block;
     font-size: 1.1em;
     padding: 4px 0;
 }
+.uniquify-q input[type=text], .uniquify-q input[type=password] {
+    width: 65%;
+}
+    .uniquify-q input[type=text].uniquify-key, .uniquify-q input[type=password].uniquify-key {
+        width: 55%;
+    }
 .uniquify-click{
 	display: none;
 }
-.uniquify-error {
-    color: #f00;
-	margin-left: 15px;
+.uniquify-error, .uniquify-warning {
+    width: 69%;
+    color: red;
+    margin-left: 31%;
+    text-align: left;
+}
+.uniquify-show-key, .uniquify-delete-key {
+    padding: 5px 0;
+    color: lightgray !important;
+}
+    .uniquify-show-key:hover, .uniquify-delete-key:hover {
+        cursor: pointer;
+        color: grey !important;
+    }
+    .uniquify-show-key:active, .uniquify-delete-key:active {
+        color: rgb(81, 177, 201);
+    }
+
+.uniquify-add-key:hover {
+    cursor: pointer;
 }
 #lean_overlay {
     position: fixed;
@@ -111,8 +154,7 @@
     font-weight: normal;
     font-style: normal;
 }
-[class^="icon-"], [class*=" icon-"] {
-    color: rgb(85, 85, 85);
+[class^="uniquify-icon-"], [class*=" uniquify-icon-"] {
     font-family: 'icomoon';
     speak: none;
     font-style: normal;
@@ -125,25 +167,25 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-[class^="icon-"]:hover, [class*=" icon-"]:hover {
+[class^="uniquify-icon-"]:hover, [class*=" uniquify-icon-"]:hover {
     color: rgb(81, 177, 201);
     cursor: pointer;
 }
-.icon-key2:before {
+.uniquify-icon-key2:before {
     content: "\e602";
 }
-.icon-eye:before {
+.uniquify-icon-eye:before {
     content: "\e600";
 }
-.icon-plus2:before {
+.uniquify-icon-plus2:before {
     content: "\e605";
 }
-.icon-key4:before {
+.uniquify-icon-key4:before {
     content: "\e607";
 }
-.icon-eye2:before {
+.uniquify-icon-eye2:before {
     content: "\e601";
 }
-.icon-trash:before {
+.uniquify-icon-trash:before {
     content: "\e603";
 }

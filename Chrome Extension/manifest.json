@@ -13,7 +13,7 @@
 				"http://*/*",
 				"https://*/*"
 			],
-			"js" : [	"scripts/jquery-1.6.1.min.js", 
+			"js" : [	"scripts/jquery-1.10.2.min.js", 
 						"scripts/jquery.leanModal.min.js",
 						"scripts/webfont.js",
 						"scripts/macsen.core.js", 
