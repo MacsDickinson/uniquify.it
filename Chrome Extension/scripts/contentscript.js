@@ -158,7 +158,7 @@ $('.uniquify-it').click(function () {
     });
 	var length = parseInt($('#uniquify-length-slider', $(this).parents('.uniquify-popup:first')).val());
     var special = $('#uniquify-special')[0].checked;
-    var specials = $('#uniquify-special-chars').val();
+    var specials = $('#uniquify-special-chars').val().split('');
     var iterations = parseInt($('#uniquify-iterations-slider', $(this).parents('.uniquify-popup:first')).val());
 	submitPass(domain, keys, length, special, iterations, specials);
 });
