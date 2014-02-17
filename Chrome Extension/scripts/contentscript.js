@@ -44,22 +44,22 @@ if ($("input:password").length) {
 				'</div>' +
 				'<div class="uniquify-q">' +
 					'<label for="uniquify-length">Password Length:</label>' +
-					'<div id="uniquify-length-slider" class="fm-slider"></div>' +
-					'<span id="uniquify-length" class="fm-slider-label"></span>' +
+					'<div id="uniquify-length-slider" class="uniquify-slider"></div>' +
+					'<span id="uniquify-length" class="uniquify-slider-label"></span>' +
 					'<input type="hidden" id="uniquify-length-value"/>' +
 				'</div>' +
 				'<div class="uniquify-q">' +
 					'<label for="uniquify-special">Special Characters:</label>' +
 					'<input id="uniquify-special" name="uniquify-special" type="checkbox" checked="checked">' +
 				'</div>' +
-				'<div class="uniquify-q" id="specialCharsContainer">' +
+				'<div class="uniquify-q" id="uniquify-special-container">' +
 					'<label for="uniquify-special-chars"></label>' +
 					'<input id="uniquify-special-chars" name="uniquify-special-chars" type="text" value="!£$%&*@~#.<>?;:_+">' +
 				'</div>' +
 				'<div class="uniquify-q">' +
 					'<label for="uniquify-iterations">Iterations:</label>' +
-					'<div id="uniquify-iterations-slider" class="fm-slider"></div>' +
-					'<span id="uniquify-iterations" class="fm-slider-label"></span>' +
+					'<div id="uniquify-iterations-slider" class="uniquify-slider"></div>' +
+					'<span id="uniquify-iterations" class="uniquify-slider-label"></span>' +
 					'<input type="hidden" id="uniquify-iterations-value" />' +
 				'</div>' +
 				'<span for="uniquify-iterations" class="uniquify-warning" id="uniquify-iterations-error">We recommend you use a higher number of iterations</span>' +
@@ -80,6 +80,9 @@ $(document).on('mouseup', '.uniquify-show-key', function () {
 $(document).on('mousedown', '.uniquify-show-key', function () {
     this.parentNode.getElementsByTagName('input')[0].type = 'text';
 });
+$(document).on('click', '.uniquify-delete-key', function () {
+    $(this).parent().remove();
+});
 $('.uniquify-btn').click(function(event) {
 	event.preventDefault();
 	$('.uniquify-key', $(this).parents('.uniquify-wrapper:first')).val("");
@@ -93,6 +96,54 @@ $('.uniquify-it').click(function () {
 	var key = $('.uniquify-key', $(this).parents('.uniquify-popup:first')).val();
 	var length = $('.uniquify-length', $(this).parents('.uniquify-popup:first')).val();
 	submitPass(domain, key, length, input);
+});
+$("#uniquify-length-slider").noUiSlider({
+    range: [8, 24],
+    start: 8,
+    step: 1,
+    handles: 1,
+    serialization: {
+        resolution: 1
+    },
+    slide: function () {
+        var length = $("#uniquify-length-slider").val();
+        $("#uniquify-length").text(length);
+        $('#uniquify-length-value').val(length);
+    }
+});
+$(".uniquify-iterations-slider").noUiSlider({
+    range: [1, 10000],
+    start: 1000,
+    step: 1,
+    handles: 1,
+    serialization: {
+        resolution: 1,
+        to: [$("#uniquify-iterations-value"), $('#uniquify-iterations')]
+    },
+    slide: function() {
+        var iterations = $("#uniquify-iterations-slider").val();
+        $("#uniquify-iterations").text(iterations);
+        $('#uniquify-iterations-value').val(iterations);
+        $('#uniquify-iterations-error').toggle(iterations < 1000);
+    }
+});
+$("#uniquify-length").text($("#uniquify-length-slider").val());
+$("#uniquify-iterations").text($("#uniquify-iterations-slider").val());
+$('#uniquify-length-value').val($("#uniquify-length-slider").val());
+$('#uniquify-iterations-value').val($("#uniquify-iterations-slider").val());
+$('#uniquify-special').click(function() {
+    $("#uniquify-special-container").toggle(this.checked);
+});
+$('.uniquify-add-key').click(function () {
+    var id = $('.uniquify-key').length;
+    var html = '<div class="uniquify-q">' +
+					'<label for="uniquify-key' + id + '">Key:</label>' +
+					'<input id="uniquify-key' + id + '" name="uniquify-key' + id + '" class="uniquify-key no-uniquify-overlay" type="password" value="" />' +
+					'<a class="uniquify-show-key"><i class="uniquify-icon-eye"></i></a>' +
+            		'<a class="uniquify-delete-key"><i class="uniquify-icon-trash"></i></a>' +
+				'</div>' +
+				'<span for="key' + id + '" class="uniquify-error" style="display: none;"></span>'
+    $(this).parent().before(html);
 });
 var submitPass = function (domain, key, length, input) {
 	var result = generatePass(domain, key, length);
