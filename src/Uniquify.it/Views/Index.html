@@ -103,7 +103,7 @@
             $("#iterations-slider").noUiSlider({
                 range: [1, 10000],
                 start: 1000,
-                step: 20,
+                step: 1,
                 handles: 1,
                 serialization: {
                     resolution: 1,
@@ -205,7 +205,7 @@
                 <label for="iterations">Iterations:</label>
                 <div id="iterations-slider" class="fm-slider"></div>
                 <span id="iterations" class="fm-slider-label"></span>
-                <label for="iterations" class="warning" id="iterations-error">We recommend you use a higher number of iterations</label>
+                <label for="iterations" class="warning" id="iterations-error" style="display:none;">We recommend you use a higher number of iterations</label>
                 <input type="hidden" id="iterations-value" />
             </div>
             <div class="fm-actons">
