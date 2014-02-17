@@ -25,19 +25,7 @@
 }
 .uniquify-popup {
 	font-size: 1.4em;
-	background-color: #fff;
-	background-color: rgba(255,255,255,.9);
-	border-top: 4px solid rgb(81, 177, 201);
-	border-bottom: 2px solid #555;
-	width: 500px;
-	margin: 10px auto;
-	word-wrap: break-word;
-	display: none;
-	font-family: 'Open Sans Condensed', sans-serif !important;
-    -webkit-transition: opacity .5s ease-out;
-    -moz-transition: opacity .5s ease-out;
-    -ms-transition: opacity .5s ease-out;
-    -o-transition: opacity .5s ease-out;
+    display: none;
 }
     .uniquify-popup h1 {
         color: rgb(81, 177, 201) !important;
@@ -59,6 +47,21 @@
     .uniquify-popup a:hover {
             color: rgb(62, 135, 153);
     }
+
+.uniquify-form, .uniquify-answer-container {
+    background-color: #fff;
+    background-color: rgba(255,255,255,.9);
+    border-top: 4px solid rgb(81, 177, 201);
+    border-bottom: 2px solid #555;
+    width: 500px;
+    margin: 10px auto;
+    word-wrap: break-word;
+    font-family: 'Open Sans Condensed', sans-serif !important;
+    -webkit-transition: opacity .5s ease-out;
+    -moz-transition: opacity .5s ease-out;
+    -ms-transition: opacity .5s ease-out;
+    -o-transition: opacity .5s ease-out;
+}
 
 .uniquify-slider {
     margin: 0 12px;
@@ -130,6 +133,8 @@
     margin-left: 31%;
     text-align: left;
 }
+/* ADD/SHOW/DELETE ICONS
+    ------------------------------------------------------*/
 .uniquify-show-key, .uniquify-delete-key {
     padding: 5px 0;
     color: lightgray !important;
@@ -145,6 +150,13 @@
 .uniquify-add-key:hover {
     cursor: pointer;
 }
+/* ANSWER
+    ------------------------------------------------------*/
+.uniquify-answer-container {
+    display: none;
+}
+/* OVERLAY
+    ------------------------------------------------------*/
 #lean_overlay {
     position: fixed;
     z-index:100;
@@ -154,7 +166,9 @@
     width:100%;
     background: #000;
     display: none;
-} 
+}
+/* ICOMOON
+    ------------------------------------------------------*/
 @font-face {
     font-family: 'icomoon';
     src: url('chrome-extension://cilkmaiabgaalocpkakabifkhlciglmm/fonts/icomoon.woff') format('woff');
