@@ -70,6 +70,9 @@
     <Content Include="Content\scripts\sha256.js" />
     <Content Include="Content\site.css" />
     <Content Include="Content\ZeroClipboard.swf" />
+    <Content Include="favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="packages.config" />
     <Content Include="Content\fonts\icomoon.eot" />
     <Content Include="Content\fonts\icomoon.ttf" />
