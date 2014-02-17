@@ -6,13 +6,13 @@
     <title>uniquify.it</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet" type="text/css">
     <link href="../Content/site.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/noUiSlider/5.0.0/jquery.nouislider.min.css" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script type="text/javascript" src="http://modernizr.com/downloads/modernizr-latest.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/noUiSlider/5.0.0/jquery.nouislider.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/1.2.3/ZeroClipboard.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
     <script type="text/javascript" src="../Content/scripts/macsen.core.js"></script>
@@ -85,31 +85,62 @@
             $(document).on('click', '.delete-key', function () {
                 $(this).parent().remove();
             });
-            $("#length-slider").slider({
-                range: "max",
-                min: 8,
-                max: 24,
-                value: 8,
-                slide: function (event, ui) {
-                    $("#length").text(ui.value);
-                    $('#length-value').val(ui.value);
+            $("#length-slider").noUiSlider({
+                range: [8, 24],
+                start: 8,
+                step: 1,
+                handles: 1,
+                serialization: {
+                    resolution: 1,
+                    to: [$("#length"), $('#length-value')]
+                },
+                slide: function () {
+                    var length = $("#length-slider").val();
+                    $("#length").text(length);
+                    $('#length-value').val(length);
                 }
             });
-            $("#iterations-slider").slider({
-                range: "max",
-                min: 1,
-                max: 10000,
-                value: 1,
-                slide: function (event, ui) {
-                    $("#iterations").text(ui.value);
-                    $('#iterations-value').val(ui.value);
-                    $('#iterations-error').toggle(ui.value < 1000);
+            $("#iterations-slider").noUiSlider({
+                range: [1, 10000],
+                start: 1000,
+                step: 20,
+                handles: 1,
+                serialization: {
+                    resolution: 1,
+                    to: [$("#iterations-value"), $('#iterations')]
+                },
+                slide: function() {
+                    var iterations = $("#iterations-slider").val();
+                    $("#iterations").text(iterations);
+                    $('#iterations-value').val(iterations);
+                    $('#iterations-error').toggle(iterations < 1000);
                 }
             });
-            $("#length").text($("#length-slider").slider("value"));
-            $("#iterations").text($("#iterations-slider").slider("value"));
-            $('#length-value').val($("#length-slider").slider("value"));
-            $('#iterations-value').val($("#iterations-slider").slider("value"));
+            //$("#length-slider").slider({
+            //    range: "max",
+            //    min: 8,
+            //    max: 24,
+            //    value: 8,
+            //    slide: function (event, ui) {
+            //        $("#length").text(ui.value);
+            //        $('#length-value').val(ui.value);
+            //    }
+            //});
+            //$("#iterations-slider").slider({
+            //    range: "max",
+            //    min: 1,
+            //    max: 10000,
+            //    value: 1,
+            //    slide: function (event, ui) {
+            //        $("#iterations").text(ui.value);
+            //        $('#iterations-value').val(ui.value);
+            //        $('#iterations-error').toggle(ui.value < 1000);
+            //    }
+            //});
+            $("#length").text($("#length-slider").val());
+            $("#iterations").text($("#iterations-slider").val());
+            $('#length-value').val($("#length-slider").val());
+            $('#iterations-value').val($("#iterations-slider").val());
             $('#special').click(function() {
                 $("#specialCharsContainer").toggle(this.checked);
             });

@@ -104,6 +104,12 @@ body {
 .fm-slider-label {
     vertical-align: middle;
 }
+.noUi-base {
+    background-color: rgb(81, 177, 201);
+}
+.noUi-origin {
+    background-color: white;
+}
 input[type=submit] {
     font-size: 1.1em;
     margin: 0 auto;
