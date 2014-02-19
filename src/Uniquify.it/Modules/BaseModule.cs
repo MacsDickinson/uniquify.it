@@ -9,7 +9,6 @@ namespace Uniquify.it.Modules
         public BaseModule()
         {
             Get["/"] = _ => View["Index", new IndexViewModel()];
-
             //Get["/Sample"] =
             //    _ =>
             //        Negotiate.WithView("Sample")
