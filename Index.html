@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>uniquify.it</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet" type="text/css">
+    <link href="../Content/site.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/noUiSlider/5.0.0/jquery.nouislider.min.css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <script type="text/javascript" src="http://modernizr.com/downloads/modernizr-latest.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/noUiSlider/5.0.0/jquery.nouislider.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/1.2.3/ZeroClipboard.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
+    <script type="text/javascript" src="../Content/scripts/macsen.core.js"></script>
+    <script type="text/javascript" src="../Content/scripts/sha256.js"></script>
+    <script type="text/javascript" src="../Content/scripts/uniquify.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var securePass = new Uniquify();
+            $('#generateForm').submit(function(e) {
+                e.preventDefault();
+            });
+            $('#generateForm').validate({
+                rules: {
+                    domain: "required",
+                    key0: { required: true, minlength: 8 },
+                    key1: { minlength: 8 },
+                    key2: { minlength: 8 },
+                    key3: { minlength: 8 },
+                    key4: { minlength: 8 },
+                    key5: { minlength: 8 },
+                    key6: { minlength: 8 },
+                    key7: { minlength: 8 },
+                    length: "required",
+                    iterations: "required",
+                    specialChars: {
+                        required: true,
+                        minlength: 5
+                    },
+                },
+                messages: {
+                    domain: "Please enter the domain name",
+                    key: {
+                        required: "Please enter a key",
+                        minlength: "The key must be at least 8 characters"
+                    },
+                    length: "Please select a password length",
+                    iterations: "Please select a number of iterations",
+                    specialChars: {
+                        required: "Please enter at least 5 special characters",
+                        minlength: "Please enter at least 5 special characters"
+                    }
+                },
+                submitHandler: function (form) {
+                    var domain = form.elements['domain'].value;
+                    var keys = [];
+                    $('.key').each(function () {
+                        var val = $(this).val();
+                        if (val !== '') {
+                            keys.push($(this).val());
+                        }
+                    });
+                    var length = parseInt(form.elements['length-value'].value);
+                    var iterations = parseInt(form.elements['iterations-value'].value);
+                    var special = form.elements['special'].checked;
+                    var specials = form.elements['specialChars'].value.split('');
+                    var result = securePass.generatePassword(domain, keys, length, special, iterations, specials);
+                    $('#result').text(result);
+                    $('#copy').attr('data-clipboard-text', result);
+                    $('.answer-container').css('opacity', 1);
+                    $('.answer-container').css('height', 'auto');
+                }
+            });
+            $(document).on('mouseup', '.show-key', function () {
+                this.parentNode.getElementsByTagName('input')[0].type = 'password';
+            });
+            $(document).on('mousedown', '.show-key', function () {
+                this.parentNode.getElementsByTagName('input')[0].type = 'text';
+            });
+            
+            $(document).on('click', '.delete-key', function () {
+                $(this).parent().remove();
+            });
+            $("#length-slider").noUiSlider({
+                range: [8, 24],
+                start: 8,
+                step: 1,
+                handles: 1,
+                serialization: {
+                    resolution: 1,
+                    to: [$("#length"), $('#length-value')]
+                },
+                slide: function () {
+                    var length = $("#length-slider").val();
+                    $("#length").text(length);
+                    $('#length-value').val(length);
+                }
+            });
+            $("#iterations-slider").noUiSlider({
+                range: [1, 10000],
+                start: 1000,
+                step: 1,
+                handles: 1,
+                serialization: {
+                    resolution: 1,
+                    to: [$("#iterations-value"), $('#iterations')]
+                },
+                slide: function() {
+                    var iterations = $("#iterations-slider").val();
+                    $("#iterations").text(iterations);
+                    $('#iterations-value').val(iterations);
+                    $('#iterations-error').toggle(iterations < 1000);
+                }
+            });
+            //$("#length-slider").slider({
+            //    range: "max",
+            //    min: 8,
+            //    max: 24,
+            //    value: 8,
+            //    slide: function (event, ui) {
+            //        $("#length").text(ui.value);
+            //        $('#length-value').val(ui.value);
+            //    }
+            //});
+            //$("#iterations-slider").slider({
+            //    range: "max",
+            //    min: 1,
+            //    max: 10000,
+            //    value: 1,
+            //    slide: function (event, ui) {
+            //        $("#iterations").text(ui.value);
+            //        $('#iterations-value').val(ui.value);
+            //        $('#iterations-error').toggle(ui.value < 1000);
+            //    }
+            //});
+            $("#length").text($("#length-slider").val());
+            $("#iterations").text($("#iterations-slider").val());
+            $('#length-value').val($("#length-slider").val());
+            $('#iterations-value').val($("#iterations-slider").val());
+            $('#special').click(function() {
+                $("#specialCharsContainer").toggle(this.checked);
+            });
+            var clip = new ZeroClipboard($("#copy"), {
+                moviePath: "/Content/ZeroClipboard.swf"
+            });
+            clip.on("load", function (client) {
+                client.on("complete", function (client, args) {
+                    $(this).val('Copied to clipboard: ' + args.text);
+                });
+            });
+            $('#add-key').click(function () {
+                var id = $('.key').length;
+                var source = $("#key-template").html();
+                var template = Handlebars.compile(source);
+                var context = { id: 'key' + id };
+                var html = template(context);
+                $(this).parent().before(html);
+            });
+        });
+    </script>
+</head>
+    <body>
+        <a href="https://github.com/MacsDickinson/uniquify.it">
+            <div class="ribbon-wrapper"><div class="ribbon-green">BETA</div></div>
+        </a>
+    <header>
+        <h1>Uniquify<span>.it</span></h1>
+    </header>
+    <div class="form-container">
+        <form id="generateForm">
+            <h3>Generate Your Secure Password:</h3>
+            <div class="fm-q">
+                <label for="domain">Domain Name:</label>
+                <input id="domain" name="domain" placeholder="eg. google.com" type="text" value="">
+            </div>
+            <div class="fm-q">
+                <label for="key0">Key:</label>
+                <input id="key0" name="key0" class="key no-uniquify-overlay" type="password" value="" />
+                <a class="show-key"><i class="icon-eye"></i></a>
+                <label for="key0" class="error" style="display: none;"></label>
+            </div>
+            <div class="fm-q">
+                <label for="add-key"></label>
+                <a id="add-key">Add Key<i class="icon-plus2"></i></a>
+            </div>
+            <div class="fm-q">
+                <label for="length">Password Length:</label>
+                <div id="length-slider" class="fm-slider"></div>
+                <span id="length" class="fm-slider-label"></span>
+                <input type="hidden" id="length-value"/>
+            </div>
+            <div class="fm-q">
+                <label for="special">Special Characters:</label>
+                <input id="special" name="special" type="checkbox" checked="checked">
+            </div>
+            <div class="fm-q" id="specialCharsContainer">
+                <label for="specialChars"></label>
+                <input id="specialChars" name="specialChars" type="text" value="!£$%&*@~#.<>?;:_+">
+            </div>
+            <div class="fm-q">
+                <label for="iterations">Iterations:</label>
+                <div id="iterations-slider" class="fm-slider"></div>
+                <span id="iterations" class="fm-slider-label"></span>
+                <label for="iterations" class="warning" id="iterations-error" style="display:none;">We recommend you use a higher number of iterations</label>
+                <input type="hidden" id="iterations-value" />
+            </div>
+            <div class="fm-actons">
+                <input type="submit" id="getPass" value="Generate Password" />
+            </div>
+        </form>
+    </div>
+    <div class="answer-container">
+        <h2>
+            <span id="result" class="result"></span>
+        </h2>
+        <div class="fm-actons">
+            <input type="submit" id="copy" value="Copy to clipboard" />
+        </div>
+    </div>
+    <section>
+        <h2>What is it?</h2>
+        <p>
+            These days one of the most exploited threats to personal online security is password re-use. Uniquify.it attempts to solve this problem by making it simple to use a unique, secure password for every different site you log into, without having to memorize a huge list of convoluted password combinations. Uniquify.it transforms your secret word into a secure password that is unique to each domain you log into. This means that all you need to remember is your secret word; no more password protected documents containing lists of secure passwords and no more online password managers that could potentially be hacked.
+        </p>
+        <p>
+            Uniquify.it generates your unique password within your browser rather than somewhere in ‘The Cloud’. This means that your secret word and your password are not transferred over the internet, making it impossible for hackers to intercept - unless they are stood behind you, with a video phone, filming your fingers typing.
+        </p>
+        <p>
+            If the unexpected happens and one of your accounts is compromised, the hackers won’t be able to access your other accounts as each website has its own unique password. Uniquify.it uses an industry standard algorithm to generate your password which means there is no danger of hackers recovering your secret word.
+        </p>
+    </section>
+    <section>
+        <h2>How do I use it?</h2>
+        <p>
+            Using Uniquify.it is simple. Uniquify.it is currently only available through this website, however a Google Chrome extension is in development which will allow users to simpler enter your secret word on any log-in page.
+        </p>
+        <p>
+            For more information and updates about uniquify.it, see my <a href="http://www.macsentom.co.uk"
+                                                                          title="Macs Dickinson">blog</a>.
+        </p>
+        <!--Well first of all you can test how it
+            works on this site, enter the domain for the site you’re logging in
+            to and your secret word and see what happens. But you don’t want to
+            be coming onto this site every time you need to log in to something
+            so go ahead and install our <a href="https://chrome.google.com/webstore/detail/securepass/jmlefpoknlahkhbigofglcbmpkikandd" title="uniquify.it in the web store" target="_blank">Google Chrome extension</a>. This plugin attaches
+            to your browser giving you the option to use uniquify.it directly in
+            the sites you know. Not using Google Chrome? Have no fear, install our
+            bookmarklet to convert the password for you.-->
+    </section>
+    <!--
+        <section>
+            <h2>Using the Chrome Extension</h2>
+            <p>
+                Installing the Google Chrome extension is by far the easiest way to use uniquify.it.
+            </p>
+            <ol>
+                <li>Head over to the <a href="https://chrome.google.com/webstore/detail/securepass/jmlefpoknlahkhbigofglcbmpkikandd" title="uniquify.it in the web store" target="_blank">Google Chrome web store</a> and install the extension.</li>
+                <li>Once installed all login boxes will be wrapped by the SecurePass login box. To open uniquify.it click on the key icon.</li>
+                <li>This opens the uniquify.it modal. Enter your keyword here and select to generate either the secure password or super secure password.</li>
+                <li>uniquify.it will insert the secure password into the password box, all you need to do now is click log in.</li>
+            </ol>
+        </section>
+    -->
+    <footer>
+        <div id="footer-copyright" class="footer-column">
+            <h2><a href="https://www.macsdickinson.com/" title="Macs Dickinson">&copy; @Model.Year Macs Dickinson</a></h2>
+            <p>
+                The information on this page is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/" rel="license">Creative Commons Attribution 3.0 Unported License</a>. Feel free to share liberally but provide attribution.
+            </p>
+        </div>
+    </footer>
+    <script id="key-template" type="text/x-handlebars-template">
+        <div class="fm-q">
+            <label for="{{id}}">Key:</label>
+            <input id="{{id}}" name="{{id}}" class="key no-uniquify-overlay" type="password" value="" />
+            <a class="show-key"><i class="icon-eye"></i></a>
+            <a class="delete-key"><i class="icon-trash"></i></a>
+            <label for="{{id}}" class="error" style="display: none;"></label>
+        </div>
+    </script>
+</body>
+</html>
